@@ -1,0 +1,11 @@
+.container {
+    width: 90vw;
+    height: 400px;
+    margin: auto;
+    background-color: skyblue;
+}
+
+.contianer img {
+    width: 19%;
+    height: auto;
+}

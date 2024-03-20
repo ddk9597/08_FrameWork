@@ -1,0 +1,16 @@
+/.metadata/
+
+.springbBeans
+
+MANIFEST.MF
+
+.factorypath
+
+settings.json
+
+*.log
+
+config.properties
+
+
+driver.xml
