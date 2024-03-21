@@ -21,9 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j // Lombok라이브러리가 제공하는 로그 객체 자동생성 어노테이션
 class ExampleController {
 
-	/* Model
+	/* 메서드 매개변수 Model
 	 * - Spring 에서 데이터 전달 역할을 하는 객체
-	 * - org.springframwork.ui 패키지
+	 * - org.springframework.ui 패키지
 	 * - 기본 scope : request
 	 * - @SessionAttributes와 함께 사용 시 session scope 변환
 	 * 

@@ -119,6 +119,25 @@ Spring MVC(Model View Controller)
 
 Thymeleaf
 	웹 및 독립형 실행 환경 모두를 위한 최신 서버측 Java 템플릿 엔진
+	SpringBoot에서 권장(반 강제)하는 템플릿 엔진
+
+	++템플릿엔진 : 화면 구성한 뒤 내용(데이터)만 바꾸는 것
+	  만들어둔 화면(html)에 데이터를 추가하여 하나의 html로 만들어서 응답
+	  JSP도 템플릿 엔진임
+
+내장객체 Scope 범위
+	page < request < session < application
+
+Model : http로 값 전달하기
+	Spring에서 데이터 전달 역할을 하는 객체
+	org.springframework.ui 패키지
+	기본 scope : request
+	@SessionAttributes 와 함께 사용 시 session scope르 변환
+
+	작성법
+		매개변수 내에 Model 사용할이름
+
+ModelAndView : 데이터전달 + forward할 파일 경로 지정
 
 각종 어노테이션 정리
 	하기 전에..
@@ -130,7 +149,8 @@ Thymeleaf
 		@..
 		public class className(){ // 클래스
 
-			private String methodName(){ // 메서등 역할을 하는 
+			private String methodName(){ // 메서드
+				// 내용 작성
 				return " 접두,접미사 생략한 반환 할 html 위치";
 			}
 		}
@@ -252,8 +272,6 @@ DI 관련 어노테이션
 			+ List<자료형> listName
 			+ Map<String, Object> mapName
 			  -> Map의 경우 key 값이 중복되면 덮어씌워짐.
-
-	3. 
 
 디버그
 	코드 오류 해결 방법 중 하나
