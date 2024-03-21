@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThymeLeaf</title>
+</head>
+<body>
+    <h1>ThymeLeaf</h1>
+
+    <h3>1. 템플릿 엔진</h3>
+
+    <pre>
+
+        템플릿엔진 : 화면을 구성한 뒤 내용(데이터)만 바꾸는 것
+        템플릿 양식과 특정 데이터 모델에 따른 입력 자료를 합성하여 결과 문서(응답화면)를 출력하는 것
+        만들어둔 화면 (html)에 데이터를 추가하여 하나의 html로 만들어서 응답
+        JSP도 템플릿 엔진
+        <a href="https://www.thymeleaf.org/"></a>
+
+    </pre>
+
+    <h3>2. ThymeLeaf </h3>
+    <pre>
+        웹 및 독립 실행형 환경 모두를 위한 최신 서버측 Java 템플릿 엔진
+        -> 웹 실행 == 요청 시 포워드 되는 화면
+        -> 독립 실행 == 브라우저(인터넷) 연결 없이도 html 파일 실행 가능 
+
+        HTML 파일에서 th(Thymeleaf)속성을 이용해 컨트롤러로 부터 전달 받은 데이터를 이용해 동적 페이지를 만들 수 있음
+        Spring Boot에서는 JSP가 아닌 Thymeleaf 사용을 권장하고있음(지금은 강제하는 중)
+    </pre>
+    <ol>
+        <li>
+            <a href="/example/ex1">타임 리프 예제1</a>
+        </li>
+
+        <li>
+            <form action="/example/ex2" method="post">
+                <h4>타임리프 예제2</h4>
+                이름 : <input type="text" name="inputName"> <br>
+                나이 : <input type="number" name="inputAge"> <br>
+                <br>
+
+                색상 : red <input type="checkbox" name="color" value="red"> 
+                green <input type="checkbox" name="color" value="green">
+                blue <input type="checkbox" name="color" value="blue"> 
+
+                <button>제출하기</button>
+                
+            </form>
+        </li>
+
+        <li>
+            <a href="/example/ex3">타임리프예제3</a>
+        </li>
+
+        <li>
+            <a href="/example/ex4">타임리프예제4</a>
+        </li>
+    </ol>
+</body>
+</html>

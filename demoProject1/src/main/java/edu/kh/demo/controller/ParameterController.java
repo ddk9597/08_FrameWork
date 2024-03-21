@@ -28,6 +28,7 @@ public class ParameterController {
 	public String paramMain() {
 		
 		// /src/main/resources/templates/param/param-main.html
+		// 결과를 내보낼 html 주소 작성
 		// Thymeleaf 접두사 접미사 생략
 		// 클래스의 @RequestMapping 에 적힌 공통 주소 생략
 		// -> param-main
@@ -54,6 +55,8 @@ public class ParameterController {
 	public String paramTest1(HttpServletRequest req) {
 		
 		String inputName    = req.getParameter("inputName");
+		// html에서 name 속성이 inputName인 객체의 전달 값(파라미터)을 얻어오기
+		// 파라미터는 매개변수 HttpServletRequest에 의해 저장됨
 		String inputAddress = req.getParameter("inputAddress");
 		int inputAge = Integer.parseInt( req.getParameter("inputAge") );
 		
@@ -68,6 +71,7 @@ public class ParameterController {
 		// 코드 오류는 없는데 정상 수행이 안될 때 확인하는 방법
 		// -> 값이 잘못된 경우 -> 값 추적
 		// application.properties에서 로그레벨 debug로 지정해야 사용 가능
+		// -> logging.level.edu.kh.demo=debug
 		
 		
 		/* Spring에서 redirect(재요청) 하기
@@ -103,11 +107,6 @@ public class ParameterController {
 	 * defaultValue : 파라미터 중 일치하는 name 속성 값이 없을 경우에 대입할 값 지정. 
 	 * 	-> required = false인 경우 사용
 	 */
-	
-	
-	
-	
-	
 	
 	// 400 Bad Request
 	// - 파라미터 불충분 상황 : 전달값, 

@@ -14,13 +14,13 @@ public class ExampleController {
 	 * 1. @RequestMapping("주소")
 	 * 
 	 * 2. @GetMapping("주소")  : GET 방식 요청만 맵핑한다(조회)
-	 * 	  @PistMapping("주소") : POST방식 요청만 맵핑	 (삽입)	
+	 * 	  @PostMapping("주소") : POST방식 요청만 맵핑	 (삽입)	
 	 *    @PutMapping("주소")  : PUT 방식 요청만 맵핑	 (수정)(from, js, a태그 요청 불가)
 	 *    @DeleteMapping("주소") : DELET 방식 요청 매핑  (삭제)(from, js, a태그 요청 불가)
 	 * 
 	 * */
 
-	@GetMapping("example") // /example GET방식 요청 매핑
+	@GetMapping("example") // /example a태그 : GET방식 요청 매핑
 	public String exampleMethod() {
 		
 		// forward 하려는 html 파일 경로 작성
