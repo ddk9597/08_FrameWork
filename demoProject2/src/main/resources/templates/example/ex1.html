@@ -41,7 +41,7 @@
   <br>
   price : 
   <span class="price">
-    <th:block th:text="${price}">여기는 뭐 아무거나 써도 되나?</th:block>  원
+    <th:block th:text="${price}">여기는 뭐 아무거나 써도 안보임</th:block>  원
   </span>
 
   <hr>
@@ -125,5 +125,7 @@
     </tbody>
   </table>
 
+  <!-- html 파일 전체를 하나의 조각으로 취급 -->
+  <th:block th:replace="~{fragments/footer}"></th:block>
 </body>
 </html>

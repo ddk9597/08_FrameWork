@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타임리프 예제5</title>
+
+    <style>
+        .green{color : rgb(15, 129, 15);}
+        .blue{color: skyblue;}
+
+        .deco{text-decoration: underline;}
+    </style>
+</head>
+<body>
+    <h1>타임리프 예제5</h1>
+
+    <h3>th:inline = "javascript" 속성 </h3>
+
+    <pre>
+        script 태그에 작성하는 속성
+        타임리프 문법으로 출력된 내용/값을 JS에 알맞은 타입으로 변환
+    </pre>
+
+    <h3 id="message"></h3>
+    <h3 id="num1"></h3>
+
+    <!-- th:inline="javascript" 알아서 숫자인지, 문자인지 
+         개발자는 신경 쓰지않고 코드 짜면 됨 
+         문법적 오류 발생하는것은 Natural Template로 해결-->
+    
+    <hr>
+
+    <h3>th:classpappend 속성 : 요소에 class 속성 값을 동적으로 추가</h3>
+
+    <h4 th:classappend="green">th:classappend 테스트 중...</h4>
+    <h4 class="green" th:classappend="deco">th:classappend 테스트 중...(일반적인 클래스 작성 + th:classappend)</h4>
+    <!-- lt == < , gt == > (태그로 인식되니까 대신 씀) -->
+    <!-- 현재 num1 값은 12345 -->
+    <h4 th:classappend="${num1 lt 10000} ? green : blue">th:classappend 삼항연산자로 때에 따라 값을 다르게</h4>
+    <h4 th:classappend="${num1 gt 10000} ? green : blue">th:classappend 삼항연산자로 때에 따라 값을 다르게</h4>
+
+    <hr>
+
+    <h3>안전 탐색 연산자 : ${객체?.필드}</h3>
+    <pre>
+        - 객체가 null인지 판단 후 null이 아닌 경우에 수행
+    </pre>
+
+    <!-- std가 null인 경우 원래는 오류 발생
+         -> 안전 탐색 연산자를 쓰면 오류 발생 X -->
+    <!-- <h4 th:text="${std.studentNo}">학번</h4> 오류발생 --> 
+    <h4 th:text="${std?.studentNo}">학번</h4> <!-- null인 경우 오류도 없고, 화면에도 안나옴 -->
+
+    <hr>
+
+    <h3>@{#numbers.sequence(시작, 끝 [, step])} : 번호 발생기</h3>
+    <pre>
+        - 시작부터 끝까지 번호로만 이루어진 숫자 배열 생성
+        ex) ${#numbers.sequence(1,5)} => [1,2,3,4,5]
+            ${#numbers.sequence(0,10,2)} => [0,2,4,6,8,10]
+        - 감소는 불가능
+        - step : 정수 1 단위만 가능
+
+        사용 목적
+        - Thymeleaf 반복문 : th:each는 향상된 for문.
+          일반 for문의 동작은 불가함(시작부터 끝까지 몇씩 증가하며 반복 못함)
+          이를 해결하기 위해 사용
+    </pre>
+
+    <ul>
+        <li th:each="i : ${#numbers.sequence(1,5)}" 
+             th:text="|테스트 ${i}|"></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script th:inline="javascript">
+        // JS Inline - Natural Template
+        // HTML 파일 독립 실행 시
+        // JS 내부 타임리프 코드 오류를 발생하지 않게 함
+
+        // + HTML 문법오류(컴파일 오류)도 해결
+        
+        /* 좌측 주석 내부 : 웹요청시 해석 */
+        /* 우측 주석 외부 : 독립시행 시 해석됨 */
+        /* 주석이 해석됨..!! -> 양 끝 띄어쓰기 하지 말 것 */
+
+        const message =/*[[${message}]]*/ "message값" ;
+        const num1 = /*[[${num1}]]*/ 100 ;
+
+        document.querySelector("#message").innerText = message;
+        document.querySelector("#num1").innerText = num1;
+        
+    </script>
+
+
+</body>
+</html>
