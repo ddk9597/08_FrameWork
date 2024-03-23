@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace=""> <!-- namespace 속성 : Mapper 인터페이스 경로 작성(필수)-->
+
+	<!-- SQL 작성하는 파일 -->
+	
+	<!-- 아래 태그는 mapper.xml만들자 마자 삭제 -->
+	<!--  <cache-ref namespace=""/> -->
+ 
+ 
+</mapper>
