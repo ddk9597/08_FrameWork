@@ -26,10 +26,35 @@
  	 	  (필드명 == 컬럼명인 경우 조회 결과가 자동으로 필드에 세팅)
  	 	  (필드명과 컬럼명이 같아지는 속성을 mybatis-config.xml에 작성함
  	 	   _표기 == 카멜표기로)
- 	 	   
- 	 	
- 	 
  	  -->
+ 	  
+ 	  <!-- 
+		mapper에서 java data(파라미터)를 SQL에 삽입하는 방법
+		
+		1) #{변수명 | 필드명} : SQL에 삽입 시 양쪽에 '' 붙여서 삽입
+		
+		ex) MEMBER_EMAIL = #{memberEmail} -> 'member01@naver.com'
+		
+		=================================================================
+		
+		2) ${변수명 | 필드명} : SQL에 삽입 시 양쪽에 '' 붙이지 않고 삽입
+		
+		ex) MEMBER_EMAIL = ${memberEmail}
+							-> member01@naver.com  (오류 발생)
+							
+		??? ${} 언제 사용할까 ???
+		1) 삽입할 값이 숫자인 경우 (숫자 리터럴은 '' 없음)
+		
+		2) SQL문 자체가 변해야 하는 경우에 사용
+		
+		ex) SELECT MEMBER_NICKNAME, ${key} FROM "MEMBER"
+		
+		- ${key} == ENROLL_DATE 인 경우
+		SELECT MEMBER_NICKNAME, ENROLL_DATE FROM "MEMBER"
+		
+		- ${key} == MEMBER_ADDRESS 인 경우
+		SELECT MEMBER_NICKNAME, MEMBER_ADDRESS FROM "MEMBER"
+	 -->
  	<select id="selectAll" resultType="edu.kh.todo.model.dto.Todo">
  		SELECT TODO_NO, TODO_TITLE, COMPLETE,
 			   TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI:SS')REG_DATE
@@ -44,5 +69,15 @@
 		FROM TB_TODO 
 		WHERE COMPLETE = 'Y'
  	</select>
+ 	
+ 	<!-- 할 일 추가 -->
+ 	<!-- 
+ 		parameterType 속성 : 전달 받은 값(전달 인자)의 타입을 명시
+ 		DTO, Map인 경우 필드명/key를 입결해서 하나씩 꺼낼 수 있음
+ 	-->
+ 	<insert id="addTodo" parameterType="edu.kh.todo.model.dto.Todo">
+ 		INSERT INTO TB_TODO
+ 		VALUES (SEQ_TODO_NO.NEXTVAL, #{todoTitle}, #{todoContent}, DEFAULT, DEFAULT)
+ 	</insert>
  
 </mapper>

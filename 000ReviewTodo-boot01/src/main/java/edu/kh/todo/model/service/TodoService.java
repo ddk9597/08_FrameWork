@@ -12,4 +12,11 @@ public interface TodoService {
 	 */
 	Map<String, Object> selectAll();
 
+	/** 할 일 추가
+	 * @param todoTitle
+	 * @param todoContent
+	 * @return result
+	 */
+	int addTodo(String todoTitle, String todoContent);
+
 }
