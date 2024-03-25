@@ -94,9 +94,26 @@ public class TodoServiceImpl implements TodoService{
 		return mapper.todoUpdate(todo);
 	}
 	
+	// 완료 여부 수정
 	@Override
 	public int changeNY(Todo todo) {
 		return mapper.changeNY(todo);
+	}
+	
+	// ajax 전체 할 일 개수 조회 서비스
+	@Override
+	public int getTotalCount() {
+		
+		
+		
+		return mapper.getTotalCount();
+	}
+	
+	@Override
+	public int getCompleteCount() {
+		
+		return mapper.getCompleteCount();
+		
 	}
 	
 }

@@ -44,5 +44,15 @@ public interface TodoService {
 	 * @return result
 	 */
 	int changeNY(Todo todo);
+
+	/** ajax 전체 할 일 개수 조회 서비스
+	 * @return totalCount
+	 */
+	int getTotalCount();
+
+	/** 완료된 할 일 개수 조회
+	 * @return
+	 */
+	int getCompleteCount();
 	
 }

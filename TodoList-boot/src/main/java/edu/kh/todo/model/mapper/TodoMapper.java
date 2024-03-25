@@ -71,13 +71,19 @@ public interface TodoMapper {
 	 */
 	int todoUpdate(Todo todo);
 
-
-
+	
+	
 	/** 할 일 여부 수정
 	 * @param todo
 	 * @return result
 	 */
 	int changeNY(Todo todo);
+
+	
+	/** 전체 할 일 개수 조회
+	 * @return
+	 */
+	int getTotalCount();
 	
 	
 	
