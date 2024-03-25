@@ -14,6 +14,7 @@ import edu.kh.todo.model.dto.Todo;
  *   mapper.xml파일과 연결되에 SQL을 호출/수행/결과 반환 가능
  *   
  *   Mybatis에서 제공하는 Mapper 상속 객체가 bean으로 등록됨
+ *   과정 : 인터페이스 -> 클래스 -> Bean으로 등록
  * */
 
 @Mapper
@@ -45,6 +46,38 @@ public interface TodoMapper {
 	 * @return result
 	 */
 	int addTodo(Todo todo);
+
+	
+	
+	/** 할 일 상세 조회
+	 * @param todoNo
+	 * @return todo
+	 */
+	Todo todoDetail(int todoNo);
+
+	
+	
+	/** 할 일 삭제
+	 * @param todoNo
+	 * @return result
+	 */
+	int deleteTodo(int todoNo);
+
+
+
+	/** 할 일 수정
+	 * @param todo
+	 * @return
+	 */
+	int todoUpdate(Todo todo);
+
+
+
+	/** 할 일 여부 수정
+	 * @param todo
+	 * @return result
+	 */
+	int changeNY(Todo todo);
 	
 	
 	

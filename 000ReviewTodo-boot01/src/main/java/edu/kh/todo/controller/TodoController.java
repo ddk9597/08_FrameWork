@@ -30,9 +30,7 @@ public class TodoController {
 		// redirect 중 : session scope로 이동
 		// 응답 후 : request scope로 복귀
 		
-		// 효과 : 잠깐 
-		
-		
+		// 효과 : 잠깐 올렸다가 내림
 		
 		// 서비스 메서드 호출 후 결과 반환 받기
 		int result = service.addTodo(todoTitle, todoContent);

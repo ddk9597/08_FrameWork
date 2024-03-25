@@ -13,11 +13,12 @@ import edu.kh.todo.model.service.TodoService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j // 로그 객체 자동 생성 : 로그 찍기 가능하게
-@Controller// 요청, 응답 제어 역할 + Bean등록
+@Controller// 요청, 응답 제어 역할 + Bean등록(스프링이 관리하는 객체)
 public class MainController {
 	
 	@Autowired // 등록된 Bean 중 같은 타입 or 상속 관계를 DI(의존성 주입)
-	private TodoService service;
+			  // 같은 TodoService타입을 의존성 주입함
+	private TodoService service; 
 	
 	@RequestMapping("/") // get, post 가리지 않고 메인페이지 호출
 	public String mainPage(Model model) {

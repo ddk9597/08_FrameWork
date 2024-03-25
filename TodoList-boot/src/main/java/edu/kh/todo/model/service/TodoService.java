@@ -2,6 +2,8 @@ package edu.kh.todo.model.service;
 
 import java.util.Map;
 
+import edu.kh.todo.model.dto.Todo;
+
 public interface TodoService {
 	
 	// Spring에서 발생하는 예외는 대부분 Unchecked 상태(SQLException)
@@ -18,5 +20,29 @@ public interface TodoService {
 	 * @return result
 	 */
 	int addTodo(String todoTitle, String todoContent);
+
+	/** 할 일 상세 조회
+	 * @param todoNo
+	 * @return todo
+	 */
+	Todo todoDetail(int todoNo);
+
+	/** 할 일 삭제하기
+	 * @param todoNo
+	 * @return result
+	 */
+	int deleteTodo(int todoNo);
+
+	/** 할 일 수정
+	 * @param todo
+	 * @return result
+	 */
+	int todoUpdate(Todo todo);
+
+	/** 할 일 완료 여부 수정
+	 * @param todo 
+	 * @return result
+	 */
+	int changeNY(Todo todo);
 	
 }

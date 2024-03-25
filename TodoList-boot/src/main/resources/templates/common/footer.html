@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+</head>
+<body>
+
+    <script th:inline="javascript">
+        const message = /*[[${message}]]*/ "전달 받은 메시지";
+                      // 전달 받은 message가 없으면 null
+    
+        if(message != null){
+        alert(message);
+        }
+    </script>
+    
+</body>
+</html>

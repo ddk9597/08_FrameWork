@@ -43,5 +43,4 @@ public interface TodoMapper {
 	int addTodo(Todo todo);
 
 	
-	
 }

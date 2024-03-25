@@ -21,7 +21,7 @@ import edu.kh.todo.model.mapper.TodoMapper;
 //- 기본값 : Service 내부 코드 수행 중 RuntimeException 발생 시 rollback
 
 //- rollbackFor 속성 : 어떤 예외가 발생했을 때 rollback할지 지정
-//----------------------------
+//--------------------------------------------------
 
 @Transactional(rollbackFor=Exception.class) // 모든 종류의 예외 발생 시 rollback 수행
 @Service // 비즈니스로직(데이터가공, 트랜잭션 처리) 역할 명시
@@ -70,6 +70,33 @@ public class TodoServiceImpl implements TodoService{
 		
 		return mapper.addTodo(todo);
 		
+	}
+	
+	// 할 일 상세 조회
+	@Override
+	public Todo todoDetail(int todoNo) {
+		
+		return mapper.todoDetail(todoNo);
+	}
+	
+	// 할 일 삭제하기
+	@Override
+	public int deleteTodo(int todoNo) {
+		
+		return mapper.deleteTodo(todoNo);
+	}	
+	
+	// 할 일 수정
+	@Override
+	public int todoUpdate(Todo todo) {
+		// myBatis 객체를 이용할 때 SQL에 전달할 수 있는 파라미터는 오직 1개
+		// 여러 데이터를 전달하고자 할 땐 map, DTO, List로 묶어서 전달
+		return mapper.todoUpdate(todo);
+	}
+	
+	@Override
+	public int changeNY(Todo todo) {
+		return mapper.changeNY(todo);
 	}
 	
 }
