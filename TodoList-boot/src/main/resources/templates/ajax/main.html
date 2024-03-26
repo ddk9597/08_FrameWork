@@ -73,28 +73,52 @@
             /
             등록일 : <span id="popupRegDate"></span>
         </div>
-        
+
         <div class="popup-row">
             [내용]
             <div id="popupTodoContent"></div>
         </div>
 
         <div class="btn-container">
-            <button>완료 여부 변경</button>
-            <button>내용 수정</button>
+            <button id="NYChangeBtn">완료 여부 변경</button>
+            <button id="updateView">내용 수정</button>
             <button id="deleteBtn">내용 삭제</button>
             
         </div>
     </div>
 
+
+
+
+
+
+    <!-- 수정 팝업 레이어(첫 화면에서 숨김처리) -->
+
+    <div id="updateLayer" class="popup-hidden">
+        <div class="popup-row">
+            제목 : <input type="text" id="updateTitle">
+        </div>
+
+        <div class="popup-row">
+            <textarea id="updateContent" cols="50" rows="5"></textarea>
+        </div>
+
+        <div class="btn-container">
+            <button id="updateBtn">수정</button>
+            <button id="updateCancel">취소</button>
+        </div>
+
+    </div>
     
 
-    <script src="/js/ajax/ajaxmain.js"></script>
+    
 
     <!-- 
         footer.html 조각을 해당 위치에 추가
         (조각의 경로는 forward 하듯이 작성(접두사, 접미사 생략))
     -->
     <th:block th:replace="~{common/footer}"></th:block>
+
+    <script src="/js/ajax/ajaxmain.js"></script>
     </body>
 </html>

@@ -2,10 +2,13 @@ package edu.kh.todo.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -136,6 +139,29 @@ public class AjaxController {
 			// retrun 자료형 : Todo
 			// -> HttpMessageConverter가 String(JSON) 형태로 변환해서 반환
 			return service.todoDetail(todoNo);
+		}
+		
+		// 할 일 삭제하기
+		@ResponseBody
+		@DeleteMapping("delete") // delete 방식 요청 처리(비동기 요청만 가능!!)
+		public int todoDelete(@RequestBody int todoNo) {
+			return service.deleteTodo(todoNo);
+		}
+		
+		// 완료여부 변경 하기
+		@ResponseBody
+		@PutMapping("changeNY")
+		public int changeNY(@RequestBody Todo todo) {
+			
+			return service.changeNY(todo);
+		}
+		
+		@ResponseBody
+		@PutMapping("update")
+		public int todoUpdate(@RequestBody Todo todo) {
+			
+			return service.todoUpdate(todo);
+			
 		}
 		
 		
