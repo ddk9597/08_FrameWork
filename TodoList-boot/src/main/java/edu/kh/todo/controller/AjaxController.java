@@ -1,9 +1,10 @@
 package edu.kh.todo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,6 +111,31 @@ public class AjaxController {
 			int result = service.addTodo(todo.getTodoTitle(), todo.getTodoContent());
 			
 			return result;
+		}
+		
+
+		@ResponseBody 
+		@GetMapping("selectList")
+		public List<Todo> selectList() {
+			List<Todo> todoList = service.selectList();
+			
+			
+			return todoList;
+			
+			// List(java 전용 타입)를 반환
+			// -> JS에서는 인식할 수 없음
+			// HttpMessageConverter가 JSON형태({}, {}, {})로 변환하여 반환한다 (JSONArray)
+		}
+		// 할 일상세 조회
+		
+		@ResponseBody // 요청한 곳으로 데이터 돌려보냄
+		@GetMapping("detail")
+		public Todo selectTodo(
+			@RequestParam("todoNo") int todoNo) {
+			
+			// retrun 자료형 : Todo
+			// -> HttpMessageConverter가 String(JSON) 형태로 변환해서 반환
+			return service.todoDetail(todoNo);
 		}
 		
 		

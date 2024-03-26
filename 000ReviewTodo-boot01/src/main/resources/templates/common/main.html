@@ -47,26 +47,30 @@
 
         
         <tbody>
-        
+            <!-- th:each로 향상된 for문 반복 -->
+            <tr th:each="todo:${todoList}" th:object="${todo}">
+                <td th:text="*{todoNo}">할 일 번호</td>
+                
+                <td>
+                    <a th:href="@{/todo/detail(todoNo=*{todoNo})}" 
+                        th:text="*{todoTitle}"> 할 일 제목</a>
+                </td>
 
-            <!-- th:object 반복되는 각 요소에 대한 객체를 지정 -->
-            <tr th:each="todoItem:${todoList}"  th:object="${todoItem}">
-    
-            <td th:text="*{todoNo}">할 일 번호</td>
-    
-            <td>
-                <!-- th:href 주소 표현 -->
-                <a th:href="@{/todo/detail(todoNo=*{todoNo})}" 
-                th:text="*{todoTitle}">할 일 제목</a>
-            </td>
-    
-            <td th:text="*{complete}">완료 여부(Y/N)</td>
-    
-            <td th:text="*{regDate}">등록일</td>
+                <td th:text="*{complete}">완료여부(y/n)</td>
+
+                <td th:text="*{regDate}">등록일</td>
             </tr>
         </tbody>
-
     </table>
+
+
+
+
+
+
+
+
+
 
     <!-- 타임리프 값을 JS 자료형에 맞게 변환 -->
     <script th:inline = "javascript">

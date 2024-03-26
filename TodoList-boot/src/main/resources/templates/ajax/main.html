@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TodoList-Ajax</title>
+    <link rel="stylesheet" href="/css/ajax-main.css">
 </head>
     <body>
         <h1>Todo List Ajax 비동기식</h1>
@@ -32,14 +33,61 @@
 
     <hr>
 
-    <!-- ${#lists.size(todoList)} == ${todoList.size()} -->
-
     <h3 id="todoHeader">
         전체 Todo 개수 : <span id="totalCount">0</span> 개 /
         완료된 Todo 개수 : <span id="completeCount">0</span> 개
 
         <button id="reloadBtn">새로고침</button>
     </h3>
+
+    <table border="1" style="border-collapse: collapse;">
+        <thead>
+            <th>번호</th>
+            <th>할 일 제목</th>
+            <th>완료 여부</th>
+            <th>등록 날짜</th>
+        </thead>
+  
+        <tbody id="tbody">
+            
+        </tbody>
+    </table>
+
+    <!--
+        할 일 상세 조회 시 출력되는 화면
+        popup layer : 현재 페이지 위에 새로운 레이어를 띄우는 것
+    -->
+    <div id="popupLayer" class="popup-hidden"> <!-- popup-hidden: 첫 화면에 숨기기 -->
+        <div class="popup-row">
+            번호 : <span id="popupTodoNo"></span>
+            /
+            제목 : <span id="popupTodoTitle"></span>
+
+            <span id="popupClose">
+                &times;
+            </span>
+        </div>
+
+        <div class="popup-row">
+            완료 여부 : <span id="popupComplete"></span>
+            /
+            등록일 : <span id="popupRegDate"></span>
+        </div>
+        
+        <div class="popup-row">
+            [내용]
+            <div id="popupTodoContent"></div>
+        </div>
+
+        <div class="btn-container">
+            <button>완료 여부 변경</button>
+            <button>내용 수정</button>
+            <button id="deleteBtn">내용 삭제</button>
+            
+        </div>
+    </div>
+
+    
 
     <script src="/js/ajax/ajaxmain.js"></script>
 

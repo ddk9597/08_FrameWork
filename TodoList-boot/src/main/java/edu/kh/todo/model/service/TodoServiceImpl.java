@@ -12,7 +12,7 @@ import edu.kh.todo.model.dto.Todo;
 import edu.kh.todo.model.mapper.TodoMapper;
 
 //--------------------------------------------------
-//@Transactional
+// @Transactional
 //- 트랜잭션 처리를 수행하라고 지시하는 어노테이션
 //(== 선언적 트랜잭션 처리)
 
@@ -114,6 +114,15 @@ public class TodoServiceImpl implements TodoService{
 		
 		return mapper.getCompleteCount();
 		
+	}
+	
+	// 할 일 목록 조회
+	@Override
+	public List<Todo> selectList() {
+		
+		
+		
+		return mapper.selectAll();
 	}
 	
 }
