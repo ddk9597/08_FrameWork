@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealEstateSearch 연습하기</title>
+</head>
+<body>
+    <h1>RealEstateSearch 연습하기</h1>
+
+    <!-- 검색하기 -->
+    <div id="searchBox">
+        <h3>검색할 매물 조건을 입력하세요</h3>
+        <table>
+            <tr>
+                <td>종류</td>
+                <td>
+                    <label for="store">상가</label>
+                    <input type="radio" name="category" id="store">
+                    /
+                    <label for="office">사무실</label>
+                    <input type="radio" name="category" id="office">
+                </td>
+            </tr>
+            <tr>
+                <td>보증금</td>
+                <td>최대<input type="number" value="0" id="deposit">만 원</td>
+            </tr>
+            <tr>
+                <td>월세</td>
+                <td>최대<input type="number" value="0" id="rent">만 원</td>
+            </tr>
+            <tr>
+                <td>면적</td>
+                <td>최소<input type="number" value="0" id="minPy">평 이상</td>
+                <td>최대<input type="number" value="0" id="maxPy">평 이하</td>
+            </tr>
+            <tr id="buttonBox">
+                <td><button id="search">검색하기</button></td>
+            </tr>
+        </table>
+        
+
+    </div>
+
+    <!-- 
+        매물 조회 
+        전체 매물 : 0 개 / 상가 : 0개 / 사무실 : 0개
+    -->
+
+</body>
+</html>
