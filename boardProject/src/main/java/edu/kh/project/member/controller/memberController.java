@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -143,6 +144,9 @@ public class memberController {
 		return "member/login";
 	}
 	
+	/** 회원가입 페이지 이동 
+	 * @return
+	 */
 	@GetMapping("signup")
 	public String signUpPage() {
 		
@@ -150,6 +154,25 @@ public class memberController {
 				
 	}
 	
+	
+	/** 회원가입
+	 * @return
+	 * @param inputMember : 입력된 회원 정보
+	 * 						(memberEmai, memberPw, memberTell, memberAddress(DTO❌, String Arr⭕)
+	 * @param memberAddress : 입력한 주소 input 3개의 값을 배열로 전달
+	 * @param ra : redirect시 request scope로 데이터를 전달하는 객체
+	 */
+	@PostMapping("signup")
+	public String signup(
+		/* @ModelAttribute */ Member inputMember,
+		@RequestParam("memberAddress") String[] memberAdderess,
+		RedirectAttributes ra
+		) {
+		
+		
+		
+		return "redirect:/";
+	}
 	
 		
 }
