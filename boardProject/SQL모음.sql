@@ -37,7 +37,49 @@ CREATE TABLE "MEMBER"(
 	-- 회원 삭제 플래그 (DELETE로 데이터를 아주 지우지 않는다.)
 	"MEMBER_DEL_FL"	  CHAR(1) DEFAULT 'N'  CHECK("MEMBER_DEL_FL" IN ('Y','N') )
 	);
-	
+
+-- 회원 번호 시퀀스 만들기
+CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
+
+
+
+-- 샘플 회원데이터 삽입
+INSERT INTO "MEMBER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL,`
+	   'member01@naver.com',
+	   '$2a$10$n0TIiJwZNXJKfwJk8uwyKuaKupO5l4m8rP05YCn/J8bmQAO/631d.',
+	   '샘플1',
+	   '01012341234',
+	   NULL, NULL,
+	   DEFAULT, DEFAULT, DEFAULT
+	   );
+
+COMMIT;
+
+SELECT * FROM "MEMBER" m ;
+
+-- 로그인 
+-- 비밀번호 조회 : 가져와서 비교해야되니까
+-- BCrypt 암호화 사용 중으로 DB에서 비밀번호 비교 불가능함.
+-- 검색조건 : 이메일이 일치하는 회원 + 탈퇴 안한 회원
+SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PW,
+	 MEMBER_TEL , MEMBER_ADDRESS , PROFILE_IMG , AUTHORITY , 
+	 TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH"시" MI"분" SS"초"') ENROLL_DATE  
+FROM "MEMBER" 
+WHERE MEMBER_EMAIL = ?
+AND MEMBER_DEL_FL = 'N';
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
