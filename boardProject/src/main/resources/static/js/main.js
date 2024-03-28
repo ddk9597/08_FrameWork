@@ -49,7 +49,7 @@
 	// form요소.addEventListener("submit", e=> { e.preventDefault(); });
 	// e.preventDefault() : 기본 이벤트 막기
 
-	const loginForm=document.querySelector("#loginForm")
+	const loginForm = document.querySelector("#loginForm")
 	// #loginForm이 화면에 존재할 때 == 로그인 상태가 아닐 때
 	if(loginForm != null){
 		// 제출 이벤트 발생 시
@@ -58,14 +58,21 @@
 			// 이메일, 비밀번호 입력 칸에 입력된 값이 없을 때 입력 막기
 			const inputEmail = document.querySelector("input[name='memberEmail']");
 			const inputPw = document.querySelector("input[name='memberPw']");
-			const checkInputEmail = inputEmail.value.length;
-			const chekInputPw = inputPw.value.length;
-			if(checkInputEmail <= 0 || chekInputPw  <= 0){
-				
+
+			// 이메일 미작성 시 
+			if(inputEmail.value.trim().length <= 0 ){
+				alert("이메일을 입력하세요");
 				e.preventDefault(); // 기본 이벤트(제출)막기
-
+				inputEmail.focus();
+				return;
 			}
-
+			if(inputPw.value.trim().length <= 0 ){
+				alert("비밀번호를 입력하세요");
+				e.preventDefault(); // 기본 이벤트(제출)막기
+				inputPw.focus();
+				return;
+			}
+			
 
 		});
 	}
