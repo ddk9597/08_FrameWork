@@ -24,7 +24,6 @@
         <!-- session에 loginMember 있으면 출력 -->
         <th:block th:text="${session.loginMember}"></th:block>
 
-
       </section>
 
 
@@ -60,10 +59,11 @@
               <!-- label 태그 : input 태그의 제목을 나타내는 태그  -->
               <input type="checkbox" name="saveId">
               아이디 저장
+              ⭕❌
             </label>
   
             <article class="signup-find-area">
-              <a href="#">회원가입</a>
+              <a href="/member/signup">회원가입</a>
               <span> | </span>
               <a href="#">ID/PW 찾기</a>
             </article>

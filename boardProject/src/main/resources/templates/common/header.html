@@ -1,3 +1,8 @@
+<!--
+  왜 doc 타입을 지정 안하니?
+  main.html에서 갖다 쓸거니까. 거기에 이미 다 지정됨.
+  -->
+
 <header>
     <section>
       <!-- 클릭 시 메인 페이지로 이동하는 로고 -->
@@ -38,6 +43,32 @@
   
     <!-- 안쓰는 섹션 -->
     <section></section>
+
+    <!-- 우측 상단 드롭다운 메뉴 -->
+    <div class="header-top-menu">
+      <th:block th:if="${session.loginMember == null}">
+        <a href="/">메인페이지</a>
+        |
+        <a href="/member/login">로그인</a>
+        <!-- get 방식 요청 로그인(a태그는 get 방식 요청) -->
+      </th:block>
+
+      <!-- 로그인 되었을 때 -->
+      <th:block th:unless="${session.loginMember == null}">
+
+        <label for="headerMenuToggle">
+          [[${session.loginMember.memberNickname}]] 
+          <span>🔽</span>
+        </label>
+
+        <input type="checkbox" id="headerMenuToggle">
+
+        <div class="header-menu">
+          <a href="#">내 정보</a>
+          <a href="/member/logout">로그아웃</a>
+        </div>
+      </th:block>
+    </div>
   
   
   </header>

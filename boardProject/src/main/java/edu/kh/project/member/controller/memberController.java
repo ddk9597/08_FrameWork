@@ -133,6 +133,25 @@ public class memberController {
 		status.setComplete(); // 세션 완료 시킨(없앰)
 		return "redirect:/";  // 메인 페이지 리다이렉트 
 	}
+		
+	
+	/** 로그인 페이지 이동
+	 * @return
+	 */
+	@GetMapping("login")
+	public String loginPage() {
+		return "member/login";
+	}
+	
+	@GetMapping("signup")
+	public String signUpPage() {
+		
+		return "member/signup";
+				
+	}
+	
+	
+		
 }
 
 //아이디 저장(Cookie)
