@@ -13,4 +13,10 @@ public interface MemberMapper {
 	 * @return loginMember
 	 */
 	public Member login(String memberEmail);
+
+	/** 회원가입 SQL 실행
+	 * @param inputMember
+	 * @return int result(성공한 행 개수)
+	 */
+	public int signup(Member inputMember);
 }

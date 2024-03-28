@@ -3,6 +3,7 @@ package edu.kh.project.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.project.member.model.dto.Member;
 import edu.kh.project.member.model.mapper.MemberMapper;
@@ -29,6 +30,10 @@ import edu.kh.project.member.model.mapper.MemberMapper;
  * */
 
 @Service // 비즈니스 로직 처리 역할 + Bean 등록(객체 자동생성 및 관리)
+@Transactional // 해당 클래스 메서드 종료 시 까지 
+		   	   // - 예외(RuntimeException)발생하지 않으면 commit,
+			   // - 예외(RuntimeException)발생 시 rollback
+			   // (AOP 기반 기술)
 public class MemberServiceImpl implements MemberService{
 
 	
@@ -70,5 +75,49 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginMember; 
 	}
+	
+	/** 회원가입 서비스
+	 *
+	 */
+	@Override
+	public int signup(Member inputMember, String[] memberAdderess) {
 		
+		// 주소가 입력되지 않으면
+		// iuputMember.getMemberAddress() -> " , , "
+		// memberAddress -> [,,]
+		// 주소 입력 시 , 가 들어가야만 하는 경우가 있다...
+		// 따라서 ,로 배열을 구분짓는 것은 불가하다.. 이에 데이터 가공이 필요함
+		
+		// 1. 주소가 입력된 경우
+		if( !inputMember.getMemberAddress().equals(",,") ) {
+			// String.join("구분자", 배열)
+			// -> 배열의 모든 요소 사이에 "구분자"를 추가하여
+			// 하나의 문자열로 만드는 메서드
+			
+			// 구분자로 "^^^" 쓴 이유 : 
+			// -> 주소, 상세주소에 없는 특수문자 생성
+			// -> 나중에 다시 3분할 할 때 구분자로 이용할 예정
+			String address = String.join("^^^", memberAdderess);
+			
+			// inputMember 주소로 합쳐진 주소 세팅하기
+			inputMember.setMemberAddress(address);
+			
+		} else { // 주소가 입력이 안된 경우(주소는 필수입력사항이 아니다)
+			// db에 ",,"가 저장이 될건데.. null로 치환해서 저장.
+			// -> notNUll 제약조건 없으므로 가능
+			inputMember.setMemberAddress(null); // null로 저장
+		}
+		
+		// 비밀번호를 암호화 하여 다시 inputMember에 setting
+		String encPw = bcrypt.encode(inputMember.getMemberPw()); 
+		inputMember.setMemberPw(encPw);
+		
+		// 트랜잭션 안해도 됨 : @Transactional
+		
+		// 회원가입 메서드 호출
+		// -> Mybatis에 의해 자동으로 SQL 수행
+		// (mapper 메서드 호출 시 SQL에 사용할 parameter는 하나만 전달 가능함)
+		return mapper.signup(inputMember);
+	}
+	
 }

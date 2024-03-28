@@ -169,9 +169,23 @@ public class memberController {
 		RedirectAttributes ra
 		) {
 		
+		// 회원 가입 서비스 호출
+		int result = service.signup(inputMember, memberAdderess);
 		
+		String path = null;
+		String message = null;
+		if(result > 0) {// 가입 성공 시
+			message = inputMember.getMemberNickname()+"님의 가입을 환영합니다😀😁😊" ;
+			path ="/" ;
+			
+			}else {
+				message = "회원 가입 실패";
+				path = "signup";
+			}
 		
-		return "redirect:/";
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
 	}
 	
 		
