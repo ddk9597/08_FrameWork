@@ -362,7 +362,7 @@ sendAuthKeyBtn.addEventListener("click", () => {
 		}else{
 			console.log("인증 번호 발송 실패");
 		}
-	}) // 이후 인증번호 성공 시 세션에 저장된 값 이용해 
+	}) 
 
 	// ****************************************
 
@@ -433,11 +433,12 @@ signupForm.addEventListener("submit", e=> {
 			let str; // 출력할 메세지를 저장할 변수
 
 			switch(key){
-				case "memberEmail": 		str = "이메일이 유효하지 않습니다"; 	break;
-				case "memberPw": 				str = "비밀번호가 유효하지 않습니다"; break;
-				case "memberPwConfirm": str = "비밀번호가 유효하지 않습니다"; break;
-				case "memberNickname": 	str = "닉네임이 유효하지 않습니다"; 	break;
-				case "memberTel": 			str = "전화번호가 유효하지 않습니다"; break;
+				case "memberEmail" : 	 str = "이메일이 유효하지 않습니다";    break;
+				case "authKey" :		 str = "이메일이 인증되지 않았습니다."; break;
+				case "memberPw": 		 str = "비밀번호가 유효하지 않습니다";  break;
+				case "memberPwConfirm" : str = "비밀번호가 유효하지 않습니다";  break;
+				case "memberNickname" :  str = "닉네임이 유효하지 않습니다";    break;
+				case "memberTel" : 		 str = "전화번호가 유효하지 않습니다";  break;
 			}
 
 			alert(str) // 경고창 출력
@@ -473,10 +474,17 @@ checkAuthKeyBtn.addEventListener("click", () => {
 		return;
 	}
 
+	// 입력받은 이메일, 인증번호로 객체 생성
+	const obj = {
+		"email" : memberEmail.value,
+		"authKey" : authKey.value
+	};
+
+
 	fetch("/email/checkAuthKey", {
 		method : "POST",
 		headers : {"Content-Type" : "application/json"},
-		body : authKey.value
+		body : JSON.stringify(obj) // obj를 json변경 후 문자열로 변경
 	})
 	.then(resp => resp.text())
 	.then(result => {

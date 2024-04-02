@@ -23,6 +23,12 @@ main{
   min-height: 500px;
 }
 
+/* 화면 너비가  1140px이 되기 전에 적용할 css */
+/* 1140px 이하일 때 적용한다 */
+@media(max-width : 1140px) {
+  main{width: 100vw;}
+}
+
 /* *********** header *********** */
 header{
   height: 200px;
@@ -422,4 +428,10 @@ label[for="headerMenuToggle"]:hover{
 .header-menu > a:hover{
   color: white;
   background-color: var(--main-color);
+}
+
+/* 로그인 버튼 크기 */
+.quick-login, .selectMemberList{
+  width: 200px;
+  height: 50px;
 }

@@ -1,5 +1,7 @@
 package edu.kh.project.email.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,14 +29,12 @@ public class EmailController {
 	
 	@ResponseBody
 	@PostMapping("signup")
-	public int signup(@RequestBody String email, HttpSession session) {
+	public int signup(@RequestBody String email) {
 		String authKey = service.sendEmail("signup", email);
 		
 		if(authKey != null) { // 인증번호가 반환되서 돌아옴
 							  // == 이메일 보내기 성공
 			
-			// 이메일로 전달한 인증번호를 Session 올려둠
-			session.setAttribute("authKey", authKey); // session
 			
 			return 1;
 		}
@@ -45,23 +45,18 @@ public class EmailController {
 	
 	
 	/** 입력된 인증번호와 Session에 있는 인증번호 비교
-	 * @param inputAuthKey
+	 * @param map : 전달받은 JSON -> MAP 변경하여 저장
 	 * @return
 	 */
 	@ResponseBody
 	@PostMapping("checkAuthKey")
 	public int checkAuthKey(
-		@RequestBody String inputAuthKey,
-		@SessionAttribute("authKey") String authKey) {
+		@RequestBody Map<String, Object> map) {
 
-		/* @SessionAttribute("Key")
-		 * - Session에 세팅된 값 중 "Key"가 일치하는 값을 얻어와
-		 *   매개 변수에 대입
-		 * */
-		
-		if(inputAuthKey.equals(authKey)) return 1;
-		
-		return 0;
+		// 입력 받은 이메일, 인증 번호가 DB에 있는지 조회
+		// 이메일 있고 인증번호 일치 == 1
+		// 아니면 0
+		return service.checkAuthKey(map);
 	}
 	
 	

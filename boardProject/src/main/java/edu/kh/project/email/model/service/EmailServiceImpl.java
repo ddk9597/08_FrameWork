@@ -1,15 +1,22 @@
 package edu.kh.project.email.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import edu.kh.project.email.model.mapper.EmailMapper;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 
+
+@Transactional // 예외 발생 시 롤백(예외 없으면 커밋)
 @Service // Bean 등록 + service 역할임을 명시
 @RequiredArgsConstructor // final 필드 자동으로 의존성 주입
 public class EmailServiceImpl implements EmailService{
@@ -19,6 +26,9 @@ public class EmailServiceImpl implements EmailService{
 	
 	// 타임리프(템플릿 엔진)을 이용해서 html코드 -> java로 변환
 	private final SpringTemplateEngine templateEngine;
+	
+	// 
+	private final EmailMapper mapper; 
 	
 	// 이메일 보내기
 	@Override
@@ -66,7 +76,32 @@ public class EmailServiceImpl implements EmailService{
 			e.printStackTrace();
 			return null;
 		}
-		return authKey; // 오류 없이 전송되면 authKey를 반환함
+		
+		// 이메일 + 인증 번호를 "TB-AUTH-KEY" 테이블에 저장
+		// 새로 발급 받으면 기존것을 UPDATE하여 저장
+		Map<String, String> map = new HashMap<>();
+		map.put("authKey", authKey);
+		map.put("email", email);
+		
+		// 1) 해당 이메일이 DB에 존재하는 경우가 있을 수 있기 때문에
+		// 수정을 먼저 진행(update)
+		// -> 결과 1 반환 == 업데이트 성공 == 이미 존재한 것을 새롭게 바꿈
+		// -> 결과 0 반환 == 업데이트 실패 == 이메일 존재 x --> 다시 INSERT 시도
+		
+		int result = mapper.updateAuthKey(map);
+		
+		// 2) 1 실패 시 insert 시도
+		if(result == 0) {
+			result = mapper.insertAuthKey(map);
+		}
+		
+		// 수정, 삭제 후에도 result == 0
+		if(result == 0){
+			return null;
+		}
+		
+		// 오류 없이 전송되면 authKey를 반환함
+		return authKey; 
 		
 	}
 	
@@ -116,6 +151,15 @@ public class EmailServiceImpl implements EmailService{
         }
         return key;
     }
+    
+    @Override
+    public int checkAuthKey(Map<String, Object> map) {
+    	
+    	return mapper.checkAuthKey(map);
+    }
+    
+    
+    
 	
 }
 

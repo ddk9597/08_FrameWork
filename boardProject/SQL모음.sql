@@ -58,6 +58,9 @@ COMMIT;
 
 SELECT * FROM "MEMBER" m ;
 
+DELETE  FROM "MEMBER" m 
+WHERE MEMBER_EMAIL = '027620@naver.com'; -- 지우고 커밋해라........
+
 -- 로그인 
 -- 비밀번호 조회 : 가져와서 비교해야되니까
 -- BCrypt 암호화 사용 중으로 DB에서 비밀번호 비교 불가능함.
@@ -70,16 +73,35 @@ WHERE MEMBER_EMAIL = ?
 AND MEMBER_DEL_FL = 'N';
 
 
+/* 이메일, 인증키 저장 테이블 생성 */
+
+CREATE TABLE "TB_AUTH_KEY"(
+	"KEY_NO" NUMBER PRIMARY KEY,
+	"EMAIL"  NVARCHAR2(50) NOT NULL,
+	"AUTH_KEY" CHAR(6) NOT NULL,
+	"CREATE_TIME" DATE DEFAULT SYSDATE NOT NULL
+	);
+
+COMMENT ON COLUMN "TB_AUTH_KEY"."KEY_NO"		IS '인증키 구분 번호(시퀀스)';
+COMMENT ON COLUMN "TB_AUTH_KEY"."EMAIL"			IS '인증 이메일';
+COMMENT ON COLUMN "TB_AUTH_KEY"."AUTH_KEY"		IS '인증번호';
+COMMENT ON COLUMN "TB_AUTH_KEY"."CREATE_TIME"	IS '인증 번호 생성 시간';
+
+CREATE SEQUENCE SEQ_KEY_NO NOCACHE; -- 인증키 구분 번호 시퀀스
+
+DROP TABLE "TB_AUTH-KEY";
 
 
+SELECT * FROM TB_AUTH_KEY;
+
+SELECT COUNT(*) 
+FROM TB_AUTH_KEY
+WHERE EMAIL = #{가입하려는 이메일 입력 값}
+AND AUTH_KEY = #{위 이메일로 보낸 인증번호}
 
 
-
-
-
-
-
-
+DELETE FROM TB_AUTH_KEY
+WHERE EMAIL = '027620@naver.com';
 
 
 

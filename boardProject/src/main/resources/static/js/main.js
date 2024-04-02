@@ -76,3 +76,60 @@
 
 		});
 	}
+
+/* 빠른 로그인 */
+const quickLoginBtns = document.querySelectorAll(".quick-login")
+// 배열형태 NodeList로 출력됨 -> 배열에게는 이벤트 추가 불가
+
+// 그래서 forEach문으로 작성
+quickLoginBtns.forEach( (item, index) => {
+	// item : 현재 반복 시 꺼내온 객체
+	// index : 현재 반복 중인 index
+
+	// quicLoginBtns 요소를 하나씩 꺼내서 이벤트 리스너 추가
+	item.addEventListener("click", e => {
+
+		const email = item.innerText; // 버튼에 innerText로 작성된 이메일 얻어오기
+
+		// get방식 
+		location.href = "/member/quickLogin?memberEmail=" + email;
+	})
+});
+
+// ---------------------------------------------------------------------
+
+/* 회원 목록 조회(비동기) */
+
+// 조회 버튼
+const selectMemberList = document.querySelector("#selectMemberList");
+
+const memberList = document.querySelector("#memberList");
+
+
+
+// 조회 버튼 클릭 시
+selectMemberList.addEventListener("click", () => {
+	// TodoList 비동기 코드 참조
+
+	// 1) 비동기로 회원 목록 조회
+	// 포함될 회원 정보 : 회원번호, 이메일, 닉네임, 탈퇴여부
+
+	// fetch 에서 첫번째 then(resonse => reponse.json()) ->
+	// JSON Array -> JS 객체 배열로 변환 [{},{},{},{}]
+
+	
+	fetch("/member/selectMemberList", {
+		method : "get",
+		headers : {"Content-Type" : "application/json"}
+	})
+
+
+
+	// 2) 두번째 then
+	// 		 tobdy에 이미 작성되어 있던 내용(이전에 조회한 목록) 삭제
+
+	// 3) 두번째 then
+	//    조회된 JS객체 배열을 이용해 tbody에 들어갈 요소를 만들고 값 세팅
+
+
+});
