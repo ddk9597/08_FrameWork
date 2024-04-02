@@ -120,4 +120,17 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.signup(inputMember);
 	}
 	
+	// 이메일 체크
+	@Override
+	public int checkEmail(String memberEmail) {
+		return mapper.checkEmail(memberEmail);
+	}
+	
+	
+	// 닉네임 체크
+	@Override
+	public int checkNickname(String memberNickname) {
+		return mapper.checkNickname(memberNickname);
+	}
+	
 }

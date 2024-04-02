@@ -68,7 +68,7 @@
 
         <!-- 닉네임 입력 -->
         <label for="memberNickname">
-            <span class="required">*</span> 닉네임
+            <span class="required" >*</span> 닉네임
         </label>
 
         <div class="signup-input-area">
@@ -95,17 +95,17 @@
         <label for="memberAddress">주소</label>
 
         <div class="signup-input-area">
-            <input type="text" name="memberAddress" placeholder="우편번호" maxlength="6" id="sample6_postcode">                  
+            <input type="text" name="memberAddress" placeholder="우편번호" maxlength="6" id="postcode">                  
             
-                  <button type="button" onclick="sample6_execDaumPostcode()">검색</button>
+                  <button type="button" id="searchAddress">검색</button>
         </div>
 
         <div class="signup-input-area">
-            <input type="text" name="memberAddress" placeholder="도로명/지번 주소" id="sample6_address">
+            <input type="text" name="memberAddress" placeholder="도로명/지번 주소" id="address">
         </div>
 
         <div class="signup-input-area">
-            <input type="text" name="memberAddress" placeholder="상세 주소" id="sample6_detailAddress">
+            <input type="text" name="memberAddress" placeholder="상세 주소" id="detailAddress">
         </div>
 
 
@@ -120,5 +120,20 @@
 
   <!-- 푸터 추가 -->
   <th:block th:replace="~{common/footer}"></th:block>
+
+  <!-- 다음 주소 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+  <!-- 
+    script 태그가 여러 개로 나눠져 있어도 
+    HTML 렌더링 시 
+    하나의 js파일 내부에 위치한 것으로 본다
+    단, 위쪽 script 에서 해석 안된 아래쪽 scriop
+  -->
+
+  <!-- 회원가입 JS 추가 -->
+  <script src="/js/member/signup.js"></script>
+
+
 </body>
 </html>

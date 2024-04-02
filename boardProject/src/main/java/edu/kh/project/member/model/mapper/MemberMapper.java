@@ -19,4 +19,16 @@ public interface MemberMapper {
 	 * @return int result(성공한 행 개수)
 	 */
 	public int signup(Member inputMember);
+
+	/** 이메일 중복 체크
+	 * @param memberEmail
+	 * @return
+	 */
+	public int checkEmail(String memberEmail);
+
+	/** 닉네임 중복 체크
+	 * @param memberNickname
+	 * @return
+	 */
+	public int checkNickname(String memberNickname);
 }
