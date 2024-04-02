@@ -61,7 +61,16 @@
 		AND MEMBER_NICKNAME = #{memberNickname}
  	</select>
  	
- 
- 
+ 	<!-- 멤버 목록 조회 -->
+    <select id="selectMember" resultType="Member">
+       SELECT 
+          "MEMBER_DEL_FL", 
+          "MEMBER_EMAIL", 
+          "MEMBER_NO", 
+          "MEMBER_NICKNAME" 
+      FROM 
+          "MEMBER"
+
+    </select>
  
 </mapper>

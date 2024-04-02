@@ -1,5 +1,7 @@
 package edu.kh.project.member.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -240,15 +242,17 @@ public class memberController {
 	/** 회원 목록 조회
 	 * @return
 	 */
-	@GetMapping("selectMemberList")
-	public String selectMemberList(
-		Model model,
-		RedirectAttributes ra) {
+	@ResponseBody // 바로 html로 보내버리기
+	@GetMapping("selectMemberList") 
+	public List<Member> selectmemberList() {
 		
-		Member selectMemberList = service.selectMemberList;
+		List<Member> selectMemberList = service.selectMemberList();
 		
-		return "redirect:/";
+		return selectMemberList;
+		
+		
 	}
+	
 	
 	
 	
