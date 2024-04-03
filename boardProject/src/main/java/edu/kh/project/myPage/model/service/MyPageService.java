@@ -13,14 +13,15 @@ public interface MyPageService {
 	 */
 	int updateInfo(Member inputMember, String[] memberAddress);
 
-	
-	
-	/** 회원 비밀번호 수정
+	/** 비밀번호 수정
 	 * @param paramMap
 	 * @param memberNo
-	 * @return
+	 * @return result
 	 */
 	int changePw(Map<String, Object> paramMap, int memberNo);
+
+	
+	
 
 	
 	

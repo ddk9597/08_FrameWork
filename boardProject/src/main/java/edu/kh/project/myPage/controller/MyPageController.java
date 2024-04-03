@@ -145,38 +145,44 @@ public class MyPageController {
 		return "redirect:info";
 	}
 	
+
 	/**
-	 * @param inputMember
-	 * @param prarmMap
-	 * @param newPw
-	 * @param ra
+	 * @param paramMap : 모든 파라미터를 맵으로 저장
+	 * @param loginMember : 세션의 로그인한 회원 정보
+	 * @param ra 
+	 * 
 	 * @return
 	 */
 	@PostMapping("changePw")
-	public String chancePw (
-	    Member inputMember,
-	    @RequestParam("currentPw") String currentPw,
-	    @RequestParam("newPw") String newPw,
-	    
-	    @SessionAttribute("loginmember") Member loginMember,
-	    RedirectAttributes ra
-		){
+	public String changePw2(
+		@RequestParam Map<String, Object> paramMap,
+		@SessionAttribute("loginMember") Member loginMember,
+		RedirectAttributes ra
+		) {
 		
-		// 전달 받은 값을 map으로 묶기
-		Map<String, Object> paramMap = new HashMap();
-		paramMap.put("currentPw", currentPw);
-		paramMap.put("newPw", paramMap);
-	    
-		// 로그인한 회원 번호
+		// 로그인한 회원 번호 조회
 		int memberNo = loginMember.getMemberNo();
 		
-		// 현재 + 새 + 회원번호를 서비스로 전달
+		// 현재pw + 새로운pw + 회원 번호를 서비스로 전달
 		int result = service.changePw(paramMap, memberNo);
 		
-		return null;
-	   
+		String path = null;
+		String message = null;
+		
+		if(result > 0) {
+			path = "/myPage/info";
+			message = "비밀번호가 변경되었습니다.";
+		} else {
+			path = "/myPage/changePw";
+			message = "현재 비밀번호가 일치하지 않습니다";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+		
 	}
-
+	
 	
 	
 	

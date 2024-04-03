@@ -81,27 +81,5 @@ if(updateInfo != null){
 	});
 	
 
-	// 비밀번호 변경 동작
-	// 현재/ 새 비밀번호 파라미터 - 세션에서 회원 번호 얻어오기
-
-	// 입력한 비밀번호
-	const currentPw = document.querySelector("#currentPw").value;
-
-	// 새 비밀번호
-	const newPw = document.querySelector("#newPw").value;
-
-	// 새 비밀번호 확인
-	const newPwConfirm = document.querySelector("#newPwConfirm").value;
-
-	// 세션에서 회원 번호 얻어오기.. 
-	// 지금은 로그인 된 상태이므로. 현재 로그인 정보를 이용하여 회원 번호를 얻어온다.
-	// 현재 로그인 정보는 어디에 있는가..
-	// 일단 불러와봐
-
-	// form태그 action으로 지정되어 있으니까 클릭 이벤트 추가 불필요
-	// action 속성의 주소로 바로 제출됨 : member/changePw
-
-	
-
 
 }
