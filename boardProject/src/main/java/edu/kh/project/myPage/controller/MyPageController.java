@@ -1,5 +1,9 @@
 package edu.kh.project.myPage.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -140,6 +145,38 @@ public class MyPageController {
 		return "redirect:info";
 	}
 	
+	/**
+	 * @param inputMember
+	 * @param prarmMap
+	 * @param newPw
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("changePw")
+	public String chancePw (
+	    Member inputMember,
+	    @RequestParam("currentPw") String currentPw,
+	    @RequestParam("newPw") String newPw,
+	    
+	    @SessionAttribute("loginmember") Member loginMember,
+	    RedirectAttributes ra
+		){
+		
+		// 전달 받은 값을 map으로 묶기
+		Map<String, Object> paramMap = new HashMap();
+		paramMap.put("currentPw", currentPw);
+		paramMap.put("newPw", paramMap);
+	    
+		// 로그인한 회원 번호
+		int memberNo = loginMember.getMemberNo();
+		
+		// 현재 + 새 + 회원번호를 서비스로 전달
+		int result = service.changePw(paramMap, memberNo);
+		
+		return null;
+	   
+	}
+
 	
 	
 	

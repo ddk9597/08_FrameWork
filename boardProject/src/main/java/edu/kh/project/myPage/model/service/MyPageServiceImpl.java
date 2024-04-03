@@ -1,6 +1,9 @@
 package edu.kh.project.myPage.model.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class MyPageServiceImpl implements MyPageService{
 
 	private final MyPageMapper mapper;
+	private final BCryptPasswordEncoder bc;
 	
 	// @RequiredArgsConstructor 를 이용했을 때 자동 완성 되는 구문
 //	@Autowired
@@ -44,6 +48,15 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		// SQL 수행 후 결과 반환
 		return mapper.updateInfo(inputMember);
+	}
+	
+	// 회원 비밀번호 수정
+	@Override
+	public int changePw(Map<String, Object> paramMap, int memberNo) {
+		
+		// 암호화된 비밀번호를 DB에서 조회
+		
+		return 0;
 	}
 	
 	

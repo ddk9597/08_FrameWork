@@ -13,4 +13,8 @@ public interface MyPageMapper {
 	 */
 	int updateInfo(Member inputMember);
 
+	
+
+
+
 }

@@ -40,4 +40,5 @@ public interface MemberMapper {
 	
 	public List<Member> selectMember();
 
+
 }
