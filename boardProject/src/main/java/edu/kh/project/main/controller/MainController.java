@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.project.main.model.service.MainService;
 import lombok.RequiredArgsConstructor;
@@ -46,8 +47,21 @@ public class MainController {
 	@PutMapping("restore")
 	public int restoreMem(
 		@RequestBody int resotreMemNo) {
-		
 		return service.restoreMem(resotreMemNo);
 	}
+	
+	
+	// LoginFilter -> loginError 리다이렉트
+	// -> message를 만들어서 다시 메인 페이지로 리다이렉트
+	@GetMapping("loginError")
+	public String loginError(
+			RedirectAttributes ra) {
+		
+		ra.addFlashAttribute("message","로그인 후 이용해 주세요");
+		return "redirect:/member/login";
+		
+	}
+	
+	
 	
 }
