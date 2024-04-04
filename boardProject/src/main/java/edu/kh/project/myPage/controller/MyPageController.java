@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.project.member.model.dto.Member;
@@ -20,6 +22,7 @@ import edu.kh.project.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
+@SessionAttributes({"loginMember"})
 @RequestMapping("myPage")
 @RequiredArgsConstructor
 public class MyPageController {
@@ -184,6 +187,45 @@ public class MyPageController {
 	}
 	
 	
+	// 회원 탈퇴하기
+	/**
+	 * @param memberPw : 입력받은 비밀번호
+	 * @param loginMember : 현재 로그인한 회원 정보(세션)
+	 * @param status : 세션 완료(없애기) 용도의 객체 -> @SessionAttributes로 등록된 세션을 완료
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("secession")
+	public String secession2(
+		@RequestParam("memberPw") String memberPw,
+		@SessionAttribute("loginMember") Member loginMember, 
+		SessionStatus status,
+		RedirectAttributes ra
+		) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		// 서비스 호출
+		int result = service.secession(memberPw, memberNo);
+		
+		String message = null;
+		String path = null;
+		
+		if(result > 0) {
+			message = "탈퇴 되었습니다.";
+			path = "/";
+		
+			status.setComplete();
+			
+		}else {
+			message = "비밀번호가 일치하지 않습니다.";
+			path = "secession";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
 	
 	
 	

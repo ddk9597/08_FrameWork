@@ -80,6 +80,17 @@ public class MyPageServiceImpl implements MyPageService{
 		
 	}
 	
+	@Override
+	public int secession(String memberPw, int memberNo) {
+		
+		String originPw = mapper.selectPw(memberNo);
+		
+		if( !(bcrypt.matches(memberPw, originPw)) ) {
+			return 0;
+		}
+		return mapper.secession(memberNo);
+	}
+	
 	
 }
 

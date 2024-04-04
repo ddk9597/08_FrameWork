@@ -45,10 +45,10 @@ CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
 
 -- 샘플 회원데이터 삽입
 INSERT INTO "MEMBER"
-VALUES(SEQ_MEMBER_NO.NEXTVAL,`
+VALUES(SEQ_MEMBER_NO.NEXTVAL,
 	   'member01@naver.com',
 	   '$2a$10$n0TIiJwZNXJKfwJk8uwyKuaKupO5l4m8rP05YCn/J8bmQAO/631d.',
-	   '샘플1',
+	   '탈퇴시도01',
 	   '01012341234',
 	   NULL, NULL,
 	   DEFAULT, DEFAULT, DEFAULT
@@ -103,7 +103,8 @@ AND AUTH_KEY = #{위 이메일로 보낸 인증번호}
 DELETE FROM TB_AUTH_KEY
 WHERE EMAIL = '027620@naver.com';
 
-
+SELECT *
+FROM "MEMBER";
 
 
 
