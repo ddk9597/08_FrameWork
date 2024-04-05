@@ -37,7 +37,6 @@ public interface MemberMapper {
 	/** 회원 목록 조회
 	 * @return
 	 */
-	
 	public List<Member> selectMember();
 
 

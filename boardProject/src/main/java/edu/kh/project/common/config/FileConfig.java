@@ -62,13 +62,13 @@ public class FileConfig implements WebMvcConfigurer{
 		// 바이트로 단위 지정
 		factory.setFileSizeThreshold(DataSize.ofBytes(fileSizeThreshold));
 		
-		//
+		// 
 		factory.setMaxFileSize(DataSize.ofBytes(maxFileSize));
 		
-		//
+		// 
 		factory.setMaxRequestSize(DataSize.ofBytes(maxRequestSize));
 		
-		//
+		// 
 		factory.setLocation(location);
 		
 		return factory.createMultipartConfig();

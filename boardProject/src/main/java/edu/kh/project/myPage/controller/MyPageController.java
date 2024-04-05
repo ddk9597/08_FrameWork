@@ -2,6 +2,7 @@ package edu.kh.project.myPage.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.project.member.model.dto.Member;
+import edu.kh.project.myPage.model.dto.UploadFile;
 import edu.kh.project.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 
@@ -265,7 +267,7 @@ public class MyPageController {
 		@RequestParam("uploadFile") MultipartFile uploadFile,
 		RedirectAttributes ra
 		) throws IllegalStateException, IOException {
-		
+	
 		String path = service.fileUpload1(uploadFile);
 		
 		// 파일이 저장되어 웹에서 접근할 수 있는 경로가 반환되었을 때
@@ -280,6 +282,81 @@ public class MyPageController {
 	}
 	
 	
+	/** 파일 업로드 + DB
+	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@PostMapping("file/test2")
+	public String fileUpload2(
+		@RequestParam("uploadFile") MultipartFile uploadFile,
+		@SessionAttribute("loginMember") Member loginMember,
+		RedirectAttributes ra
+			) throws IllegalStateException, IOException {
+		
+		// 업로드한 사람 확인 위해 로그인한 회원 번호 확인하기
+		int memberNo = loginMember.getMemberNo();
+		
+		// 파일 업로드 후 DB에 파일 insert 할 것이라 자료형 int로 서비스에 연결
+		// insert한 결과 행의 갯수 반환 받을 것임
+		int result = service.fileUpload2(memberNo, uploadFile);
+		
+		String message = null;
+		if(result > 0) {
+			message = "파일 업로드 성공";
+		} else {
+			message = "파일 업로드 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/myPage/fileTest"; // 변경 예정z
+		
+	}
+	
+	// 파일 목록 조회
+	@GetMapping("fileList")
+	public String fileList(Model model) {
+		
+		// 파일 목록 조회 서비스 호출
+		List<UploadFile> list = service.fileList();
+		
+		model.addAttribute("list", list);
+		
+		return "myPage/myPage-fileList";
+	}
+	
+	// 여러 파일 업로드 하기
+	@PostMapping("file/test3")
+	public String fileUpload3(
+			@RequestParam("aaa") List<MultipartFile> aaaList,
+			@RequestParam("bbb") List<MultipartFile> bbbList,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra
+			) throws IllegalStateException, IOException {
+		
+		// aaa 파일 미제출 시 -> 0,1번 인덱스 파일이 모두 비어있음
+		// bbb 파일 미제출 시 -> 0번 인덱스 파일이 비어있음(List가 비어있는 것은 아님)
+		// -> 파일 업로드 미제출 조건등에 활용 가능하므로 기억해두자.
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		int result = service.fileUpload3(aaaList, bbbList, memberNo);
+		
+		
+		
+		String message = null;
+		
+		// result == 업로드 된 파일 개수
+		if(result == 0) { // 업로드한 파일이 하나도 없는 경우
+			message = "업로드된 파일이 없습니다";
+		} else {
+			message = result + "개 파일이 업로드 되었습니다";
+		}
+		 
+		ra.addFlashAttribute("message", message);
+		return "redirect:/myPage/fileTest";
+	}
 	
 	
 	
