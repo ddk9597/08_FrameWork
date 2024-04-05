@@ -1,6 +1,7 @@
 package edu.kh.project.myPage.controller;
 
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.kh.project.member.model.dto.Member;
 import edu.kh.project.myPage.model.dto.UploadFile;
 import edu.kh.project.myPage.model.service.MyPageService;
+import jakarta.mail.Multipart;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -355,9 +357,40 @@ public class MyPageController {
 		}
 		 
 		ra.addFlashAttribute("message", message);
+		
 		return "redirect:/myPage/fileTest";
 	}
 	
+	@PostMapping("profile")
+	public String profile1(
+		@RequestParam("profileImg") MultipartFile profileImg,
+		@SessionAttribute("loginMember") Member loginMember,
+		RedirectAttributes ra
+		) throws IllegalStateException, IOException {
+	
+		// 로그인한 회원 번호
+		int memberNo = loginMember.getMemberNo();
+		
+		// 서비스 호출
+		// -> /myPage/profile/변경된파일명 형태의 문자열
+		// 현재 로그인한 회원의 PROFILE_IMG 컬럼 값으로 수정(UPDATE)
+		int result = service.profile(profileImg, loginMember);
+		
+		String message = null;
+		
+		if(result > 0 )	{ // 수정 성공 
+			
+			message = "변경 성공";
+			// 세션에 저장된 로그인 회원 정보에서 프로필 이미지 수정
+			
+			
+		}
+		else message = "변경 실패";
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:profile";
+	}
 	
 	
 }

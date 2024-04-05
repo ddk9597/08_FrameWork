@@ -62,6 +62,15 @@ public interface MyPageService {
 	 */
 	int fileUpload3(List<MultipartFile> aaaList, List<MultipartFile> bbbList, int memberNo) throws IllegalStateException, IOException;
 
+	/**프로필 이미지 변경하기
+	 * @param profileImg
+	 * @param loginMember
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	int profile(MultipartFile profileImg, Member loginMember) throws IllegalStateException, IOException;
+
 
 	
 	

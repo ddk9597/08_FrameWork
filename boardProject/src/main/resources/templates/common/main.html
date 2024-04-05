@@ -120,13 +120,14 @@
 
           <article class="login-area">
             
-            <a href="/myPage/info">
+            <a href="/myPage/profile">
               <!-- 프로필 이미지 -->
 
               <!-- messages.properties에 작성된 기본 사용자 이미지 -->
-              <img th:src="#{user.default.image}" 
-                  id="memberProfile"
-                  alt="프로필 이미지 없음" >
+              <img th:with="user=#{user.default.image}" 
+                   th:src="${session.loginMember.profileImg ?: user }"
+                   id="memberProfile"
+                   alt="프로필 이미지" >
             </a>
 
             <!-- 닉네임, 이메일, 로그아웃 버튼 영역 -->
@@ -137,7 +138,6 @@
 
                 <a href="/member/logout" id="logoutBtn">로그아웃</a>
               </div>
-
 
               <p th:text="*{memberEmail}">이메일</p>
 

@@ -1,6 +1,7 @@
 package edu.kh.project.member.model.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,9 @@ import lombok.ToString;
 			// + MyBatis 에서 dto 값을 전달할 때 
 @Setter		// 커맨드 객체 
 @ToString
-@NoArgsConstructor	// 기본생성자 : 커맨드 객체 만들 때 필요
+@NoArgsConstructor	// 기본생성자 : 커맨드 객체 만들 때 필요 + builder 할때 필요
+@AllArgsConstructor // builder 할때 필요
+@Builder
 public class Member {
 	
 	   private int 		memberNo;		
