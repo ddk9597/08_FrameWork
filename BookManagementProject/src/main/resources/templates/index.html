@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #BookList{
+            border: 1px solid black;
+            border-collapse: collapse;
+            
+        }
+    </style>
+
+</head>
+<body>
+    <h1>책 관리 프로그램</h1>
+
+    <a href="/book/registBook"> 책 등록</a> <br><br>
+    <a href="/book/editBookList"> 책 검색, 수정, 삭제</a>
+
+    <table>
+        <thead>
+            <th><h3 style="font-size: 20px;"> 모든 책 조회 </h3></th>
+            <th><button id="selectBookList">조회</button></th>
+        </thead>
+    </table>
+
+	<table border="1" style="border-collapse: collapse;">
+		<thead>
+			<th>책 번호</th>
+			<th>제목</th>
+			<th>저자</th>
+			<th>가격</th>
+			<th>등록일</th>
+		</thead>
+
+	</tbody>
+	<tbody id="bookList">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+	</tbody>
+		
+
+	</table>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

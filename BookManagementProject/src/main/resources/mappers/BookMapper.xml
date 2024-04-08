@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kch.book.mapper.BookMapper"> <!-- mapper 인터페이스 경로 작성 -->
+  
+  <!-- 책 목록 불러오기 -->
+  <select id="selectBook">
+  
+  	SELECT  * 
+	FROM BOOK_SEARCH
+	ORDER BY BOOK_NO ASC
+  
+  </select>
+  
+  <!-- 책 등록하기 -->
+  <insert id="doReg">
+  	INSERT INTO BOOK_SEARCH
+  	VALUES(SEQ_BOOK_NO.NEXTVAL,
+  		#{bookTitle},
+  		#{author},
+  		#{bookPrice},
+  		DEFAULT
+  	)
+  
+  </insert>
+  
+</mapper>

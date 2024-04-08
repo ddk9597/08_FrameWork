@@ -150,6 +150,7 @@ public class MemberServiceImpl implements MemberService{
 		return loginMember;
 	}
 	
+	// 회원 목록 조회
 	@Override
 	public List<Member> selectMemberList() {
 		

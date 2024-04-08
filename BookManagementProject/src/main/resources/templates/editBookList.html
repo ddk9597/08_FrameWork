@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> 책 검색, 수정, 삭제</h1>
+
+    <form action="#">
+        제목 : <input type="text"> <button>검색</button>
+    </form>
+    <br><br>
+
+    <table border="1" style="border-collapse: collapse;" id="editBookList">
+        <thead>
+            <th>책 번호</th>
+            <th>제목</th>
+            <th>저자</th>
+            <th>가격</th>
+            <th>등록일</th>
+            <th>수정버튼</th>
+            <th>삭제버튼</th>
+        </thead>
+
+        <tbody>
+			<tr th:each="book:${bookList}" th:object="${book}">
+
+				<td th:text="*{bookNo}">책 번호</td>
+				<td th:href="@{/book/editBookList(bookNo=*{bookNo})}" th:text="*{bookTitle}">제목</td>
+				<td th:text="*{author}">저자</td>
+				<td th:text="*{bookPrice}">가격</td>
+				<td th:text="*{regDate}">등록일</td>
+				<td>
+					<a th:href="@{/book/edit(bookNo=*{bookNo})}">수정</a>
+				</td>
+				<td>
+					<a th:href="@{/book/delete(bookNo=*{bookNo})}">삭제</a>
+				</td>
+			</tr>
+			
+		</tbody>
+                
+		
+
+    </table>
+</body>
+</html>

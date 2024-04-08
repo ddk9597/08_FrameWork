@@ -444,6 +444,9 @@ INSERT INTO BOOK_SEARCH VALUES (2, '이방인', '알베르 카뮈', '13500', DEF
 INSERT INTO BOOK_SEARCH VALUES (3, '장수탕 선녀님', '백희나', '13500', DEFAULT);
 INSERT INTO BOOK_SEARCH VALUES (4, '한 사람의 노래가 온 거리에 노래를', '신경림', '6300', DEFAULT);
 
+-- 첵 번호 시퀀스 만들기
+CREATE SEQUENCE SEQ_BOOK_NO NOCACHE;
+
 
 
 
