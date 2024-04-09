@@ -66,27 +66,10 @@ public class BookController {
 		return path;
 	}
 	
-	
-	@GetMapping("editBookList")
-	public String editBookList(
-		@RequestParam("bookNo")int bookNo,
-		Model model,
-		RedirectAttributes ra) {
-		
-		// Book book = service.editList(bookNo);
-		
-//		String path = null;
-//		if( book != null) {
-//			
-//			path = "book/editbookList";
-//			
-//		}
-		
-		
-		
-		return "/editBookList";
-	}
-	
+//	@ResponseBody
+//	@GetMapping("editBookList")
+//	public List<Book> editList
+//	
 	
 	
 	
