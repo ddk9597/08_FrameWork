@@ -66,12 +66,23 @@ public class BookController {
 		return path;
 	}
 	
-//	@ResponseBody
-//	@GetMapping("editBookList")
-//	public List<Book> editList
-//	
 	
+	@GetMapping("editBookList")
+	public String editBookList() {
+		
+		return "/editBookList";
+		
+	}
 	
+	@ResponseBody
+	@GetMapping("searchBookList")
+	public List<Book> searchTitle(
+		@RequestParam ("searchTitle") String searchTitle) {
+		
+		List<Book> book = service.searchTitle(searchTitle);
+		
+		return book;
+	}
 	
 	
 	

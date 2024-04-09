@@ -67,42 +67,43 @@ if(registBook != null){
 
 // ----------------------------------------------------------------------- //
 
-// const editBookList = document.querySelector("#editBookList");
+const searchBookList = document.querySelector("#searchBookList");
 
-// if(editBookList != null){
-
-
-// 	// 리스트 조회 버튼 클릭 시 비동기 동작
-// 	editBookList.addEventListener("click", () => {
-
-// 			// 비동기로 책 목록 조회
-// 			// 책 번호, 제목, 글쓴이, 가격, 등록일
-
-// 			fetch("/book/editBookList", {
-// 					method : "GET",
-// 					headers : {"Content-Type" : "application/json"}
-// 			})
-// 			.then(response => response.json())
-// 			.then(result =>{
-// 					console.log(result);
-// 					console.log("반환 타입 : " + typeof result);
-
-// 					const tbody = document.querySelector("#bookList");
-// 					tbody.innerHTML = "";
-
-// 					for(let list of result){
-// 							const tr = document.createElement("tr");
-// 							const arr = ['bookNo', 'bookTitle', 'author', 'bookPrice', 'regDate']
-
-// 							for(let key of arr ){
-// 									const td = document.createElement("td");
-// 									td.innerText = list[key];
-// 									tr.append(td);
-// 							}
-// 							tbody.append(tr);
-// 					}
-// 			} );
+if(searchBookList != null){
 
 
-// 	});
-// }
+	// 리스트 조회 버튼 클릭 시 비동기 동작
+	searchBookList.addEventListener("click", () => {
+
+			// 비동기로 책 목록 조회
+			// 책 번호, 제목, 글쓴이, 가격, 등록일
+
+			fetch("/book/searchBookList", {
+					method : "GET",
+					headers : {"Content-Type" : "application/json"}
+			})
+			.then(response => response.json())
+			.then(result =>{
+					console.log(result);
+					console.log("반환 타입 : " + typeof result);
+
+					const tbody = document.querySelector("#bookList");
+					tbody.innerHTML = "";
+
+					for(let list of result){
+							const tr = document.createElement("tr");
+							const arr = ['bookNo', 'bookTitle', 'author', 'bookPrice', 'regDate']
+              const trBtn1 = 
+
+							for(let key of arr ){
+									const td = document.createElement("td");
+									td.innerText = list[key];
+									tr.append(td);
+							}
+							tbody.append(tr);
+					}
+			} );
+
+
+	});
+}

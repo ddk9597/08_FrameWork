@@ -19,5 +19,12 @@ public interface BookMainService {
 
 	int doReg(String inputTitle, String inputAuthor, int inputPrice);
 
+
+	/** 책 수정을 위해 비동기로 조회
+	 * @param searchTitle
+	 * @return
+	 */
+	List<Book> searchTitle(String searchTitle);
+
 	
 }

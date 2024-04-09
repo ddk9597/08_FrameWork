@@ -34,4 +34,11 @@ public class BookMainServiceImpl implements BookMainService{
 		return mapper.doReg(book);
 	}
 	
+	@Override
+	public List<Book> searchTitle(String searchTitle) {
+		
+		
+		return mapper.searchTitle(searchTitle);
+	}
+	
 }

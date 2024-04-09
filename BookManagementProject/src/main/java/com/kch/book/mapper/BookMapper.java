@@ -21,4 +21,11 @@ public interface BookMapper {
 	 */
 	public int doReg(Book inputBook);
 
+
+	/**책 수정을 위해 비동기로 조회
+	 * @param searchTitle
+	 * @return
+	 */
+	public List<Book> searchTitle(String searchTitle);
+
 }
