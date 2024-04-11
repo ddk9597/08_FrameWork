@@ -75,7 +75,7 @@ public class BookController {
 	}
 	
 	@ResponseBody
-	@GetMapping("searchBookList")
+	@PostMapping("searchBookList")
 	public List<Book> searchTitle(
 		@RequestParam ("searchTitle") String searchTitle) {
 		
@@ -84,6 +84,12 @@ public class BookController {
 		return book;
 	}
 	
+	@PostMapping("changePrice")
+	public List<Book> changePrice(
+			){
+		
+		return null;
+		}
 	
 	
 	

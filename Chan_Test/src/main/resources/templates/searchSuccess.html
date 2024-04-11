@@ -10,21 +10,25 @@
 
 	<table border="1" style="border-collapse: collapse;">
 		<thead>
-			<th>회원 번호</th>
-			<th>회원 아이디</th>
-			<th>회원 이름</th>
-			<th>회원 나이</th>
+			<tr>
+				<th>회원번호</th>
+				<th>회원아이디</th>
+				<th>회원이름</th>
+				<th>회원나이</th>
+			</tr>
 		</thead>
 
 		<tbody>
-		<!-- th:each 향상된 for문 반복 -->
-		<tr th:each="user : ${userList}" th:object="${user}">
-			<td th:text="*{userNo}">회원 번호</td>
-			<td th:text="*{userId}">회원 아이디</td>
-			<td th:text="*{userName}">회원 이름</td>
-			<td th:text="*{userAge}">회원 나이</td>
-		</tr>
-	
+
+			<th:block th:each="user : ${userList}">
+				<tr>
+					<th th:text="${user.userNo}">번호</th>
+					<th th:text="${user.userId}">아이디</th>
+					<th th:text="${user.userName}">이름</th>
+					<th th:text="${user.userAge}">나이</th>
+				</tr>
+			</th:block>
+
 		</tbody>
 	</table>
 </body>

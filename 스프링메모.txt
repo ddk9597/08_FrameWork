@@ -280,21 +280,42 @@ DTO 객체 출력
 		5) 여러 파라미터를 하나의 DTO 객체로 받음
 
 	6. @PathVariable
-	 - 작성 위치 : 메서드 매개변수 안
+	 - 작성 위치 : @Request/Get/Post/Put/DeleteMapping 메서드 매개변수 안
 	 - 기능 	 : 주소 중 일부분을 변수값처럼 사용
-	 - 작성 예시
-	 	@GetMapping("ex2/{number}")
-		public String pathVariableTest(
-			@PathVariable("number") int number
-			// 주소 중 {number} 부분의 값을 가져와 매개변수에 저장 
-			// + 자료형 변수명으로 지정
-			// + requestScope에 세팅
-			) {
-			
-			log.debug("number : " + number);
-			
-			return "example/testResult";
-		}
+	 						 @Request/Get/Post/Put/DeleteMapping()에 작성된 
+							 URL에서 특정 경로를 얻어와 변수에 저장하는 어노테이션
+	  - 작성 예시 1
+				@GetMapping("ex2/{number}")
+				public String pathVariableTest(
+				@PathVariable("number") int number
+				// 주소 중 {number} 부분의 값을 가져와 매개변수에 저장 
+				// + 자료형 변수명으로 지정
+				// + requestScope에 세팅
+				) {
+				
+				log.debug("number : " + number);
+				
+				return "example/testResult";
+			}
+
+		- 작성 예시 2
+			요청 주소 : /test/영주/하와이
+
+			@GetMapping("test/{apple}/{banana})
+			public String testz(
+				@PathVariable("apple") String a,
+				@PathVariable("banana") String b,
+			){
+				// a에 저장된 값 : 영주
+				// b에 저장된 값 : 하와이
+			}
+
+			++ 추가 내용
+				요청 주소에 정규표현식을 사용해서 요청 주소를 제한할 수 있음.
+				ex) @GetMapping(”{boardCode:[0-9]+}”)
+			  // boardCode 자리에 숫자로만 된 주소만 매핑함
+
+
 
 	7. @Mapper
 	 	1) 인터페이스(객체 등록 못함)을 객체처럼 쓸 수 있게 해주는 어노테이션
@@ -370,7 +391,15 @@ DTO 객체 출력
 	 - rollbackFor속성 : 언제 rollback할지 예외를 지정
 	 - 작성 위치 : 
 
-	1. @
+	 1. @
+	 - 기능 	 :
+	 - 작성 위치 : 
+
+	 1. @
+	 - 기능 	 :
+	 - 작성 위치 : 
+
+	 1. @
 	 - 기능 	 :
 	 - 작성 위치 : 
 	

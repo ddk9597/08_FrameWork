@@ -3,9 +3,9 @@
 <mapper namespace ="com.kh.test.model.mapper.UserMapper">
 
 
-	<select id="searchMember" parameterType="String" resultType = "_int">
+	<select id="selectUser" parameterType="String" >
 	
-		 SELECT COUNT(*) FROM TB_USER WHERE USER_ID = #{searchMember}
+		 SELECT * FROM TB_USER WHERE USER_ID = #{searchMember}
 	
 	</select>
 	

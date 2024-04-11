@@ -9,9 +9,11 @@ import com.kh.test.model.dto.User;
 @Mapper
 public interface UserMapper {
 
-	int searchMember(String searchMember);
-
-	List<User> selectUser2();
+	/**
+	 * @param searchMember
+	 * @return
+	 */
+	List<User> selectUser(String searchMember);
 
 
 }

@@ -8,9 +8,9 @@
 <body>
     <h1> 책 검색, 수정, 삭제</h1>
 
-    <form action="/book/searchBookList" method="GET">
-        제목 : <input type="text" name="searchTitle" id="searchBookList"> <button>검색</button>
-    </form>
+    
+      제목 : <input type="text" name="searchTitle" id="searchTitle"> 
+      <button id="searchBookListBtn">검색</button>
     <br><br>
 
   <table border="1" style="border-collapse: collapse;" id="editBookList">
@@ -24,16 +24,13 @@
       <th>삭제버튼</th>
     </thead>
 
-    <tbody id="bookList">
-      
+      <tbody id="bookList">
 
-		</tbody>
-
-    <tr><button>수정</button></tr>
-    <tr><button>삭제</button></tr>
+      </tbody>
 
 		
 
     </table>
 </body>
+<script src="/js/main.js"></script>
 </html>
