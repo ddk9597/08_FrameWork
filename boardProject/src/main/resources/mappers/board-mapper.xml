@@ -16,7 +16,6 @@
  		
  		type 속성 : 연결할DTO 또는 별칭
  		id 속성 : 해당 태그를 식별할 값
- 		
   -->
   
   <resultMap type="Board" id="board_rm">
@@ -33,7 +32,34 @@
 			column : 조회 결과 중 지정된 컬럼의 값을 파라미터로 전달
 			javaType : List(컬렉션)의 타입을 지정
 			ofType : List(컬렉션)의 제네릭(타입 제한) 지정
+			
+			mapper의 변수명과 같은 id의 쿼리가 실행되고, 
+			그 결과는 쿼리의 id와 같은 select 속성을 가진 
+			<collection> 태그에서 정의된 property 속성의 DTO 값에 저장된다.
 		-->
+		
+		<!--  시작 태그 안에 / : 시작하자마자 종료함 -->
+		
+		<!-- 해당 게시글 이미지 목록 조회 후 필드에 저장 -->
+		<collection 
+			property = "imageList"
+			select   = "selectImageList" 
+			column   = "BOARD_NO"
+			javaType = "java.util.ArrayList"
+			ofType   = "BoardImg"
+		/>
+		
+		<!-- 해당 게시글 댓글 목록 조회 후 필드에 저장 -->
+		<collection 
+			property = "commentList"
+			select   = "selectCommentList" 
+			column   = "BOARD_NO"
+			javaType = "java.util.ArrayList"
+			ofType   = "Comment"
+		/>
+			
+		
+		
   
   </resultMap>
 
@@ -102,10 +128,11 @@
 	</select>
 	
 	 
-	 // resultMap
-	 
-	 // 게시글 상세 조회
-	 <select id="selectOne" resultType="Board">
+	 <!-- resultMap : 해당 쿼리의 결과를 id가 동일한 select 태그를 통해 list 형태로 저장.
+	 				  저장되는 위치는 select 태그로 정의한 property 의 속성값인 DTO
+	  게시글 상세 조회
+	  board_rm :  -->
+	 <select id="selectOne" resultMap="board_rm">
 		SELECT BOARD_NO, BOARD_TITLE,
 		BOARD_CONTENT, BOARD_CODE, READ_COUNT,
 		MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG,
@@ -132,6 +159,32 @@
 
 	</select>
  
+ 
+ <!-- 상세 조회한 게시글의 이미지 목록을 조회 -->
+ 	<select id="selectImageList" resultType="BoardImg">
+ 		SELECT * 
+ 		FROM "BOARD_IMG" 
+		WHERE BOARD_NO = #{boardNo}
+		ORDER BY IMG_ORDER
+ 	</select>
+ 	
+ 	<!-- 상세 조회한 게시글의 댓글 목록 조회 -->
+ 	<select id="selectCommentList" resultType = "Comment">
+ 		SELECT LEVEL, C.* FROM
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+			    BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_COMMENT_NO, COMMENT_DEL_FL
+			FROM "COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE BOARD_NO = #{boardNo}) C
+			WHERE COMMENT_DEL_FL = 'N'
+			OR 0 != (SELECT COUNT(*) FROM "COMMENT" SUB
+					 WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO
+					 AND COMMENT_DEL_FL = 'N')
+		START WITH PARENT_COMMENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+		ORDER SIBLINGS BY COMMENT_NO
+ 	</select>
     
  
 </mapper>

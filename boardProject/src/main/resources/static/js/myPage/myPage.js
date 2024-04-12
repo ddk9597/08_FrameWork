@@ -52,7 +52,7 @@ if(updateInfo != null){
 		regExp = /^01[0-9]{1}[0-9]{3,4}[0-9]{4}$/;
 		if( !regExp.test(memberTel.value) ){
 			alert("전화번호가 올바르지 않습니다.");
-			e.preventDefault;
+			e.preventDefault();
 			return;
 		}
 
