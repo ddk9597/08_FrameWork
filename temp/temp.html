@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temp</title>
+
+  <link rel="stylesheet" href="./temp.css">
+
+</head>
+<body>
+  <section class="navVar">
+    <div class="container">
+      <h1>Real Estate</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Properties</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+    
+    <th:block th:replace="~{temp/header}"></th:block>
+
+    <main>
+      <section class="main">
+        <div class="container">
+          <h2>믿음 신뢰 정직 KH 중개법인</h2>
+        </div>
+      </section>
+  
+      <section class="properties">
+        <div class="container">
+          <h2>Featured Properties</h2>
+          <!-- Property listings go here -->
+        </div>
+      </section>
+    </main>
+  
+    
+  </body>
+  </html>
