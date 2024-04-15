@@ -116,7 +116,8 @@ public class MyPageServiceImpl implements MyPageService{
 		// - getSize() : 파일 크기
 		// - isEmpty() : 업로드한 파일이 없을 경우 true
 		// - getOriginalFileName() : 원본 파일 명
-		// - transferTo(경로) : 메모리 또는 임시 저장 경로에 업로드된 파일을 원하는 경로에 전송(서버 어떤 폴더에 저장할지 지정)
+		// - transferTo(경로) : 메모리 또는 임시 저장 경로에 업로드된 파일을 원하는 경로에 전송
+		//                      (서버 어떤 폴더에 저장할지 지정)
 		
 		// 파일 검사하기
 		// 업로드한 파일이 없을 경우

@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!--  -->
-	<title >게시판 이름</title>
+	<!--  -->
+	<title>게시판 이름</title>
 
 	<th:block th:replace="~{common/common}"></th:block>
 
@@ -23,16 +23,13 @@
 
 		<section class="board-list">
 
-      <!-- 스코프 단계별 동일 여부를 활용한 cp의 게시판 종류 확인하기 -->
-      <!-- application, request 스코프 단계에서. -->
-      <th:block th:each="boardType : ${application.boardTypeList}">
+			<!-- 스코프 단계별 동일 여부를 활용한 cp의 게시판 종류 확인하기 -->
+			<!-- application, request 스코프 단계에서. -->
+			<th:block th:each="boardType : ${application.boardTypeList}">
 
-        <h1 class="board-name" th:if="${boardType.boardCode} == ${boardCode}"
-        th:text="${boardType.boardName}">
-          
-        </h1>
+				<!-- <h1 class="board-name" th:if="${boardType.boardCode} == ${boardCode}" th:text="${boardType.boardName}"></h1> -->
 
-      </th:block>
+			</th:block>
 
 			<h1 class="board-name" th:text="${boardName}">게시판 이름</h1>
 
@@ -73,33 +70,33 @@
 
 						<!-- 게시글이 존재할 때 -->
 						<th:block th:unless="${#lists.isEmpty(boardList)}">
-							
+
 							<tr th:each="board : ${boardList}" th:object="${board}">
-								
+
 								<td th:text="*{boardNo}">게시글 번호</td>
-								
+
 								<td>
 									<!-- 썸네일 추가 예정 -->
-	
-                  <!-- 상세 조회 주소에 cp가 포함된 이유 : 상세에서 목록 돌아올 때 사용. -->
+
+									<!-- 상세 조회 주소에 cp가 포함된 이유 : 상세에서 목록 돌아올 때 사용. -->
 									<a th:href="@{/board/{boardCode}/{boardNo} (boardCode=${boardCode}, boardNo=*{boardNo}, 
                   cp=${pagination.currentPage})}" th:text="*{boardTitle}">
-                  게시글 제목</a>
+										게시글 제목</a>
 									<th:block th:text="|[*{commentCount}]|">댓글 수</th:block>
 								</td>
-	
+
 								<!-- 작성자 닉네임 -->
 								<td th:text="*{memberNickname}">닉네임</td>
-	
+
 								<!-- 작성일 -->
 								<td th:text="*{boardWriteDate}">2023-10-26</td>
-	
+
 								<!-- 조회수 -->
 								<td th:text="*{readCount}">0</td>
-	
+
 								<!-- 좋아요 수 -->
 								<td th:text="*{likeCount}">0</td>
-	
+
 							</tr>
 						</th:block>
 
@@ -133,19 +130,18 @@
 
 					<!-- <th:block th:each=" i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}"> -->
 					<th:block th:each=" i : *{#numbers.sequence(startPage, endPage)}">
-            <!-- 현재 보고있는 페이지 -->
-					  <!-- <li th:if="${i == pagination.currentPage}"> -->
-					  <li th:if="${i} == *{currentPage}">
-              <a class="current" th:text="${i}">현재 페이지</a>
-            </li>
-  
-  					<!-- 보고있지 않은 페이지 -->
-  				  <li th:unless="${i == pagination.currentPage}"> 
-              <a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=${i})}" 
-              th:text="${i}">이동할 페이지</a> 
-            </li>
+						<!-- 현재 보고있는 페이지 -->
+						<!-- <li th:if="${i == pagination.currentPage}"> -->
+						<li th:if="${i} == *{currentPage}">
+							<a class="current" th:text="${i}">현재 페이지</a>
+						</li>
+
+						<!-- 보고있지 않은 페이지 -->
+						<li th:unless="${i == pagination.currentPage}">
+							<a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=${i})}" th:text="${i}">이동할 페이지</a>
+						</li>
 					</th:block>
-					
+
 
 					<!-- 다음 목록 시작 번호로 이동 -->
 					<li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage})}">&gt;</a></li>

@@ -29,6 +29,40 @@ public interface BoardMapper {
 	 */
 	List<Board> selectBoardList(int boardCode, RowBounds rowBounds);
 
+	/** 게시글 상세 조회
+	 * @param map
+	 * @return
+	 */
 	Board selectOne(Map<String, Integer> map);
+
+	/** 상세 게시글의 좋아요 해제하기(DELETE)
+	 * @param map
+	 * @return
+	 */
+	int deleteBoardLike(Map<String, Integer> map);
+
+	/** 상세 게시글의 좋아요 반영하기(INSERT)
+	 * @param map
+	 * @return
+	 */
+	int insertBoardLike(Map<String, Integer> map);
+
+	/** 해당 게시글의 좋아요 개수를 조회해서 반환
+	 * @param integer
+	 * @return count
+	 */
+	int selectLikeCount(int temp);
+
+	/** 조회 수 증가
+	 * @param boardNo
+	 * @return
+	 */
+	int updateReadCount(int boardNo);
+
+	/** 증가된 조회수 조회
+	 * @param boardNo
+	 * @return
+	 */
+	int selectReadCount(int boardNo);
 
 }

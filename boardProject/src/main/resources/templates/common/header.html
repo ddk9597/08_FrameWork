@@ -4,88 +4,81 @@
   -->
 
 <header>
-    <section>
-      <!-- 클릭 시 메인 페이지로 이동하는 로고 -->
-      <a href="/">
-        <img src="/images/logo.jpg" alt="메인 로고" id="homeLogo">
-      </a>
-    </section>
-  
-    <!-- 검색어 입력할 수 있는 요소 배치 영역 -->
-    <section>
-      <article class="search-area">
-        <form action="#" method="GET">
-          <fieldset>
-  
-            <!-- autocomplete="off" : 자동완성 off -->
-            <input type="search" 
-                   id="query" 
-                   name="query"
-                   placeholder="검색어를 입력해 주세요."
-                   autocomplete="off"
-            >
-  
-            <!-- 제목 검색 -->
-            <input type="hidden" name="key" value="t">
-  
-            <!-- 검색 버튼 -->
-            <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
-  
-          </fieldset>
-        </form>
-  
-        <!-- 검색 결과 -->
-        <ul id="searchResult" class="close"></ul>
-  
-      </article>
-    </section>
-  
-  
-    <!-- 안쓰는 섹션 -->
-    <section></section>
+  <section>
+    <!-- 클릭 시 메인 페이지로 이동하는 로고 -->
+    <a href="/">
+      <img src="/images/logo.jpg" alt="메인 로고" id="homeLogo">
+    </a>
+  </section>
 
-    <!-- 우측 상단 드롭다운 메뉴 -->
-    <div class="header-top-menu">
-      <th:block th:if="${session.loginMember == null}">
-        <a href="/">메인페이지</a>
-        |
-        <a href="/member/login">로그인</a>
-        <!-- get 방식 요청 로그인(a태그는 get 방식 요청) -->
-      </th:block>
+  <!-- 검색어 입력할 수 있는 요소 배치 영역 -->
+  <section>
+    <article class="search-area">
+      <form action="#" method="GET">
+        <fieldset>
 
-      <!-- 로그인 되었을 때 -->
-      <th:block th:unless="${session.loginMember == null}">
+          <!-- autocomplete="off" : 자동완성 off -->
+          <input type="search" id="query" name="query" placeholder="검색어를 입력해 주세요." autocomplete="off">
 
-        <label for="headerMenuToggle">
-          [[${session.loginMember.memberNickname}]] 
-          <span>🔽</span>
-        </label>
+          <!-- 제목 검색 -->
+          <input type="hidden" name="key" value="t">
 
-        <input type="checkbox" id="headerMenuToggle">
+          <!-- 검색 버튼 -->
+          <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
 
-        <div class="header-menu">
-          <a href="/myPage/info">내 정보</a>
-          <a href="/member/logout">로그아웃</a>
-        </div>
-      </th:block>
-    </div>
-  
-  
-  </header>
-  
-  
-  <!-- navigator -->
-  <nav>
-    <ul>
-  
-      <th:block th:each="boardType : ${application.boardTypeList}">
-        <li>
-          <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}"
-             th:text="${boardType.boardName}">게시판이름</a>
-        </li>
-      </th:block>
-     
-    </ul>
-  </nav>
+        </fieldset>
+      </form>
 
-  
+      <!-- 검색 결과 -->
+      <ul id="searchResult" class="close"></ul>
+
+    </article>
+  </section>
+
+
+  <!-- 안쓰는 섹션 -->
+  <section></section>
+
+  <!-- 우측 상단 드롭다운 메뉴 -->
+  <div class="header-top-menu">
+    <th:block th:if="${session.loginMember == null}">
+      <a href="/">메인페이지</a>
+      |
+      <a href="/member/login">로그인</a>
+      <!-- get 방식 요청 로그인(a태그는 get 방식 요청) -->
+    </th:block>
+
+    <!-- 로그인 되었을 때 -->
+    <th:block th:unless="${session.loginMember == null}">
+
+      <label for="headerMenuToggle">
+        [[${session.loginMember.memberNickname}]]
+        <span>🔽</span>
+      </label>
+
+      <input type="checkbox" id="headerMenuToggle">
+
+      <div class="header-menu">
+        <a href="/myPage/info">내 정보</a>
+        <a href="/member/logout">로그아웃</a>
+      </div>
+    </th:block>
+  </div>
+
+
+</header>
+
+
+<!-- navigator -->
+<nav>
+  <ul>
+
+    <th:block th:each="boardType : ${application.boardTypeList}">
+      <li>
+        <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}"
+          th:text="${boardType.boardName}">게시판이름</a>
+      </li>
+    </th:block>
+
+  </ul>
+</nav>

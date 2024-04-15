@@ -243,17 +243,13 @@ public class MyPageController {
 		
 	/* Spring 에서 파일 업로드를 처리하는 방법
 	 * 
-	 * - enctype="multipart/form-data" 로 클라이언트 요청을 받으면
+	 * - html에서 enctype="multipart/form-data" 로 클라이언트 요청을 받으면
 	 *   (문자, 숫자, 파일 등이 섞여있는 요청)
 	 *   
 	 *   이를 MultiPartResolver를 이용해서 섞여있는 파라미터를 분리
 	 *   
 	 *   문자열, 숫자 -> String 타입으로 변환
 	 *   파일 		  -> MultipartFile에 담겨서 나옴
-	 *   
-	 *   
-	 * 
-	 * 
 	 * 
 	 * */
 	
