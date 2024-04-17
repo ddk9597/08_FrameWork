@@ -103,10 +103,7 @@ const changeImageFn= (inputImage, order) => {
 
   });
 
-
-
 }
-
 
 for(let i = 0 ; i < inputImageList.length ; i ++){
 
@@ -125,8 +122,6 @@ for(let i = 0 ; i < inputImageList.length ; i ++){
     backupInputList[i].value = ""; // 백업본도 삭제하겠다.
   });
 }
-
-
 
 /* 제목, 내용 미입력 방지 */
 const boardTitle = document.querySelector("#boardTitle");

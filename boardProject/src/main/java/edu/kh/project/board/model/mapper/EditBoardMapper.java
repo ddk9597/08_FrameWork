@@ -42,4 +42,16 @@ public interface EditBoardMapper {
 	 */
 	int deleteImage(Map<String, Object> map);
 
+	/** 게시글 이미지 수정
+	 * @param img
+	 * @return
+	 */
+	int updateImage(BoardImg img);
+
+	/** 게시글 수정 : 이미지 추가 삽입
+	 * @param img
+	 * @return
+	 */
+	int insertImage(BoardImg img);
+
 }

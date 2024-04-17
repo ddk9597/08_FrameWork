@@ -208,6 +208,8 @@ public class EditBoardController {
 	 * @param deleteOrder : 삭제된 이미지 순서가 기록된 문자열(1,2,3, ...)
 	 * @param querystring : 수정 성공 시 이전 파라미터 유지(cp, 검색어)
 	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
 	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/update")
 	public String boardUpdate(
@@ -219,7 +221,7 @@ public class EditBoardController {
 		RedirectAttributes ra,
 		@RequestParam(value = "deleteOrder", required = false) String deleteOrder,
 		@RequestParam(value = "querystring", required = false, defaultValue="") String querystring
-		) {
+		) throws IllegalStateException, IOException {
 		
 		// 1. 커맨드 객체 (inputBiard)에 boardCode, boardNo, memberNo 세팅
 		inputBoard.setBoardCode(boardCode);
@@ -230,7 +232,20 @@ public class EditBoardController {
 		// 2. 게시글 수정 서비스 호출 후 결과 반환 받기
 		int result = service.boardUpdate(inputBoard, images, deleteOrder);
 		
-		return null;
+		// 3. 서비스 결과에 따라 응답 제어
+		String message = null;
+		String path = null;
+		
+		if(result > 0) {
+			message = "게시글이 수정 되었습니다";
+			path = String.format("/board/%d/%d%s", boardCode, boardNo, querystring);
+		} else {
+			message = "수정 실패";
+			path = "update"; // 상대경로 -> getMapping으로 바뀌어서 수정 화면으로 전환
+		}
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
 		
 	}
 	
