@@ -151,3 +151,4 @@ boardWriteFrm.addEventListener("submit", (event) => {
     return;
   }
 });
+

@@ -47,8 +47,7 @@
 
             <!-- 비동기로 좋아요 누를 때 동작 (4/22월 예정)-->
             <!-- 좋아요 누른적이 있으면 fa-solid, 없으면 fa-regular 클래스 추가 -->
-            <i class="fa-heart fa-regular" id="boardLike"
-            th:classappend="*{likeCheck == 1}?fa-solid:fa-regular"></i>
+            <i class="fa-heart fa-regular" id="boardLike" th:classappend="*{likeCheck == 1}?fa-solid:fa-regular"></i>
 
             <!-- 좋아요 개수 -->
             <span th:text="*{likeCount}">0</span>
@@ -118,12 +117,20 @@
         <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
 
         <!-- 
-                ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
-                객체가 null인지 판별해서 null이 아닌 경우에 수행
-             -->
+          ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)
+          객체가 null인지 판별해서 null이 아닌 경우에 수행
+        -->
         <th:block th:if="${board.memberNo == session.loginMember?.memberNo}">
           <button id="updateBtn">수정</button>
-          <button id="deleteBtn">삭제</button>
+
+          <form id="deleteForm">
+            <button id="deleteBtn">get삭제</button>
+          </form>
+
+          <form id="delFormPost">
+            <button id="deleteBtnPost">post삭제</button>
+          </form>
+
         </th:block>
 
         <button id="goToListBtn">목록으로</button>
@@ -144,8 +151,11 @@
 
     /* 로그인 상태인 경우 로그인한 회원 번호를 전역변수로 저장 */
     // session의 loginMember가 null이 아닐 경우에만 회원번호(memberNo)얻어오기
-    const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호" ; 
-    
+    const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
+
+    /* 현재 게시글의 게시판 번호를 전역변수로 저장 */
+    const boardCode = /*[[${boardCode}]]*/ "게시판 코드 번호";
+
     /* 현재 게시글 번호를 전역변수로 저장 */
     const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
 

@@ -1,7 +1,9 @@
 package edu.kh.project.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -112,8 +114,48 @@ public class EditBoardController {
 			// 게시글 작성(INSERT) 성공 시 -> 작성된 글 상세 조회로 redirect
 			return "redirect:" + path;
 		}
+	
 		
+	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/delete")
+	public String delBulletin(
+		@PathVariable("boardCode") int boardCode,
+		@PathVariable("boardNo") int boardNo
+		) {
+		 
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardCode", boardCode);
+		map.put("boardNo", boardNo);
+		
+		int result = service.delBulletin(map);
+		
+		String path;
+		
+		if(result > 0) {
+			path = "redirect:/board/" + boardCode;
+		} else {
+			path = "redirect:/board/" + boardCode + "/" + boardNo ;
+			
+		}
+		
+		
+		return path;
 	}
+//		
+//	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/deleteAsPost")
+//	public String deleteAsPost (
+//		@RequestParam()
+//			) {
+//		
+//		String path = null;
+//		
+//		return path;
+//	}
+//	
+//	
+	
+	
+	
+} // last }
 	
 	
 

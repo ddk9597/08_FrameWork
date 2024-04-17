@@ -63,3 +63,86 @@ boardLike.addEventListener("click", e => {
     e.target.nextElementSibling.innerText = count;
   })
 });
+
+/* 게시물 삭제 버튼 클릭 */
+
+/** 작동 방법 
+ * [게시글 삭제]
+
+1. 삭제 버튼 클릭 시
+  "삭제 하시겠습니까?"  (확인/취소)  출력
+  
+2. 취소 -> alert("취소됨")
+
+3. 확인 -> "/editBoard/{boardCode}/{boardNo}/delete"
+           GET 방식 요청
+           
+4. {boardCode} 게시판의 {boardNo} 글의
+   BOARD_DEL_FL 값을 'Y'로 변경
+   
+5. 변경 성공 -> 해당 게시판 목록 1page로 리다이렉트
+
+   실패 -> 보고있던 글 상세조회 페이지로 리다이렉트
+
+*/
+
+// 게시물을 get 방식 삭제하기
+const deleteForm = document.querySelector("#deleteForm");
+
+if (deleteForm !== null) {
+  deleteForm.addEventListener("submit", (event) => {
+    event.preventDefault(); // 기본 동작 방지
+
+    let delBtnResult = confirm("게시글을 삭제하시겠습니까?");
+    if (delBtnResult) {
+      location.href = `/editBoard/${boardCode}/${boardNo}/delete`;
+      alert("게시글이 삭제되었습니다.");
+
+    } else {
+      alert("게시글 삭제가 취소되었습니다.");
+    }
+  });
+}
+
+
+// 게시물을 POST 방식으로 삭제하기
+
+/** 작동 방법 
+ * [게시글 삭제]
+
+  1. 삭제 버튼 클릭 시
+    "삭제 하시겠습니까?"  (확인/취소)  출력
+    
+  2. 취소 -> alert("취소됨")
+
+  3. 확인 -> "/editBoard/{boardCode}/{boardNo}/delete"
+  POST 방식 요청
+
+  4. {boardCode} 게시판의 {boardNo} 글의
+    BOARD_DEL_FL 값을 'Y'로 변경 
+    (로그인한 회원이 작성한 글일 경우에만) 
+    --> 애초에 삭제 버튼이 없음
+
+  5. 변경 성공 -> 해당 게시판 목록 1page로 리다이렉트
+
+    실패 -> 보고있던 글 상세조회 페이지로 리다이렉트
+
+*/
+
+const delFormPost = document.querySelector("#delFormPost");
+if(delFormPost != null){
+  delFormPost.addEventListener("submit", e => {
+    e.preventDefault();
+
+    let delBtnResultPost = confirm("정말로 삭제?");
+    // 확인 버튼 누른 경우
+    if(delBtnResultPost){
+      location.href = `/editBoard/${boardCode}/${boardNo}/deleteAsPost`;
+      alert("삭제됨");
+    } else {
+      alert("삭제 취소됨");
+    }
+    
+  });
+
+}
