@@ -25,4 +25,12 @@ public interface EditBoardService {
 	 */
 	int delBulletin(Map<String, Object> map);
 
+	/** 게시글 수정하기
+	 * @param inputBoard
+	 * @param images
+	 * @param deleteOrder
+	 * @return
+	 */
+	int boardUpdate(Board inputBoard, List<MultipartFile> images, String deleteOrder);
+
 }

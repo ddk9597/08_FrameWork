@@ -108,15 +108,6 @@ const changeImageFn= (inputImage, order) => {
 }
 
 
-
-
-
-
-
-
-
-
-
 for(let i = 0 ; i < inputImageList.length ; i ++){
 
   // input태그에 이미지가 선택 된 경우(값이 변경된 경우)

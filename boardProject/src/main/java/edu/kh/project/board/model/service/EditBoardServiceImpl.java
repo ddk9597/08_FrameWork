@@ -3,6 +3,7 @@ package edu.kh.project.board.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.kh.project.board.model.BoardInsertException;
+import com.fasterxml.jackson.databind.type.MapType;
+
 import edu.kh.project.board.model.dto.Board;
 import edu.kh.project.board.model.dto.BoardImg;
+import edu.kh.project.board.model.exception.BoardInsertException;
 import edu.kh.project.board.model.mapper.EditBoardMapper;
 import edu.kh.project.common.util.Utility;
 import lombok.RequiredArgsConstructor;
@@ -137,6 +140,51 @@ public class EditBoardServiceImpl implements EditBoardService{
 	public int delBulletin(Map<String, Object> map) {
 		
 		return mapper.delBulletin(map);
+	}
+
+	
+	// 게시글 수정하기
+	@Override
+	public int boardUpdate(Board inputBoard, List<MultipartFile> images, String deleteOrder) {
+		
+		// 1. 게시글 부분(제목, 내용) 수정
+		int result = mapper.boardUpdate(inputBoard);
+		
+		// 수정 실패시 바로 리턴
+		if(result == 0 ) return 0;
+		
+		// --------------------------------------------------
+		// 2. 이미지 관련 부분 처리
+		// 게시글 수정 시 이미지 부분에서 생각해야 할 것들
+		
+		// 1) 기존 0 -> 삭제된 이미지 -> DELETE 수행 
+		// --> deleteOrder 이용 ex) (1,2,3)
+		// DELETE FORM BOARD_IMG
+		// WHERE IMG_ORDER IN (1,2,3) == WHERE IMG_ORDER=(${deleteOrder})
+		
+		// 2) 기존 0 -> 새 이미지로 변경 -> UPDATE 수행
+		// --> (삭제된 이미지가 있는 경우)
+		if(deleteOrder != null && !deleteOrder.equals("")  ) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("deleteOrder", deleteOrder);
+			map.put("boardNo", inputBoard.getBoardNo() );
+			
+			result = mapper.deleteImage(map);
+			
+			// 삭제 실패한 경우(부분 실패도 포함) 
+			// -> runtimeException 발생
+			if(result == 0) {
+				
+			}
+		}
+		
+		// 3) 기존 X -> 새 이미지 추가 -> INSERT 수행
+		
+		
+		
+		return 0;
+		
+		
 	}
 	
 }

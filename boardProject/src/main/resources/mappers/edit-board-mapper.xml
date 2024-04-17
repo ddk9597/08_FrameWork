@@ -84,7 +84,28 @@
 		
  	</update>
  	
+ 	<!-- 게시글 제목, 내용 수정(부분수정) -->
+ 	<update id="boardUpdate">
+ 		
+ 		UPDATE BOARD
+ 		SET 
+ 		BOAR_TITLE = #{boardTitle},
+ 		BOARD_CONTENT = #{boardContent},
+ 		WHERE BOARD_CODE = #{boardCode}
+ 		AND BOARD_NO = #{boardNo}
+ 		AND MEMBER_NO = #{memberNo}
  	
+ 	</update>
+ 	
+ 	<!-- #{} : 해당 컬럼의 자료형에 맞는 리터럴로 변환 (""생성됨)(대입, 비교 등에 주로 사용)-->
+ 	<!-- ${} : SQL에 값 그대로 추가(문자열이라도 "" 생성되지 않음) -->
+ 	<!-- 게시글 수정 : 게시글 이미지 삭제 -->
+ 	<delete id="deleteImage">
+ 		DELETE FORM BOARD_IMG
+		WHERE IMG_ORDER=(${deleteOrder})
+ 		AND BOARD_NO = #{boardNo}
+ 	
+ 	</delete>
  	
  	
 </mapper>
