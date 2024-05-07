@@ -18,12 +18,11 @@ public class MainController {
 	
 	private final MainService service;
 	
-	@RequestMapping("/") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
+	@RequestMapping("") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
 	public String mainPage() {
 		
 		
 		return "common/main";
-		
 	}
 	
 	/** 비밀번호 초기화

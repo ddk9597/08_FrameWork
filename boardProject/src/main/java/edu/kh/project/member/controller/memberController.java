@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.OracleDatabaseException;
 
 
 
@@ -206,7 +208,7 @@ public class memberController {
 	}
 	
 	
-
+	// 닉네임 확인
 	@ResponseBody
 	@GetMapping("checkNickname")
 	public int checkNickname(
@@ -226,15 +228,23 @@ public class memberController {
 		@RequestParam("memberEmail") String memberEmail, 
 		Model model, 
 		RedirectAttributes ra) {
-		
-		Member loginMember = service.quickLogin(memberEmail);
-		
-		if(loginMember == null) {
-			ra.addFlashAttribute("message", "해당 이메일 회원이 존재하지 않습니다");
+		try {
+			Member loginMember = service.quickLogin(memberEmail);
 			
-		} else {
-			model.addAttribute("loginMember", loginMember); // @SessionAttribute가 session으로 올려준다
+			if(loginMember == null) {
+				ra.addFlashAttribute("message", "해당 이메일 회원이 존재하지 않습니다");
+				
+			} else {
+				model.addAttribute("loginMember", loginMember); // @SessionAttribute가 session으로 올려준다
+			}
+		} catch(Exception e) {
+			// 매개변수 e : 발생된 예외 객체
+			e.printStackTrace();
+			
+			model.addAttribute("e", e);
+			return "error/500";
 		}
+		
 		
 		return "redirect:/";
 	}
@@ -254,6 +264,24 @@ public class memberController {
 		
 	}
 	
+	// @ExceptionHandler(OracleDatabaseException.class)
+	// -> memberController 내부에 발생되는 
+	// 모든 OracleDatabaseException을 잡아서 처리하는 메서드로 지정
+	// 이렇게 메서드마다 처리할 예외를 지정해서 생성 가능
+	
+	/**
+	 * @param e : 던져진 예외 객체
+	 * @param model : Spring에서 데이터를 전달하는 용도의 객체(request scope 기본)
+	 * @return
+	 */
+	@ExceptionHandler(Exception.class)
+	// -> MmeberController 내부 모든 예외 처리 메서드
+	public String memberExceptionHandler(Exception e, Model model) {
+		e.printStackTrace(); // 콘솔에 예외 출력
+		model.addAttribute(e);
+		
+		return "error/500";
+	}
 	
 	
 		
@@ -267,3 +295,11 @@ public class memberController {
 		//	 요청에 쿠키가 담겨져서 서버로 넘어감
 		// - 쿠키의 생성, 수정, 삭제는 Server가 관리, 저장은 Client 가 함
 		// - Cookie는 httpServletResponse를 이용해서 생성하고 Client 에게 전달(응답)할 수 있음
+
+
+
+
+
+
+
+

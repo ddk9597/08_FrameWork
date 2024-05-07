@@ -3,7 +3,7 @@
 <mapper namespace ="com.kh.test.model.mapper.UserMapper">
 
 
-	<select id="selectUser" parameterType="String" >
+	<select id="temp" parameterType="String" >
 	
 		 SELECT * FROM TB_USER WHERE USER_ID = #{searchMember}
 	

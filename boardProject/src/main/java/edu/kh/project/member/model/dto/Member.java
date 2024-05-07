@@ -31,6 +31,14 @@ public class Member {
 	   private String 	profileImg;
 	   private String 	enrollDate;
 	   private String 	memberDelFl;
-	   private int 		authority; 
+	   private int 		authority;
+	   
+	   
+	   @Override
+	    public String toString() {
+	        return "MemberMenu{name='" + memberNo + "', id=" + memberEmail + "}";
+	    }
+	   
+	   
 	
 }

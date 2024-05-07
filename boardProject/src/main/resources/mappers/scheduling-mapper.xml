@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.project.common.scheduling.mapper.SchedulingMapper">
+  <!-- resultType은 한 행의 자료형이 무엇인지 고려해서 작성 -->
+  <select id="selectImageList" resultType="String">
+  	SELECT SUBSTR(PROFILE_IMG, INSTR(PROFILE_IMG, '/', -1)+1)  AS "FILE_NAME"
+		FROM "MEMBER" m 
+		WHERE PROFILE_IMG IS NOT NULL
+		
+		UNION ALL
+		
+		SELECT IMG_RENAME AS FILE_NAME
+		FROM BOARD_IMG bi 
+  </select>
+  
+</mapper>
